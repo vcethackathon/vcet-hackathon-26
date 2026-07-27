@@ -74,9 +74,11 @@ body {
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: #070809;
 }
+
 ::-webkit-scrollbar-thumb {
   background: var(--magenta);
   border-radius: 4px;
@@ -86,12 +88,14 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
 button {
   font: inherit;
   cursor: pointer;
   border: none;
   background: none;
 }
+
 img,
 video {
   max-width: 100%;
@@ -107,12 +111,10 @@ body::before {
   z-index: 9998;
   background:
     linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.18) 50%),
-    linear-gradient(
-      90deg,
+    linear-gradient(90deg,
       rgba(255, 0, 0, 0.03),
       rgba(0, 255, 0, 0.01),
-      rgba(0, 0, 255, 0.03)
-    );
+      rgba(0, 0, 255, 0.03));
   background-size:
     100% 3px,
     5px 100%;
@@ -124,6 +126,7 @@ body::before {
   max-width: 1400px;
   margin: 0 auto;
 }
+
 .section-label {
   font-family: var(--font-pixel);
   font-size: 0.6rem;
@@ -135,6 +138,7 @@ body::before {
   gap: 0.6rem;
   margin-bottom: 1.5rem;
 }
+
 .section-label::before {
   content: "";
   display: inline-block;
@@ -143,21 +147,21 @@ body::before {
   background: var(--cyan);
   box-shadow: var(--glow-cyan);
 }
+
 .section-title {
   font-family: var(--font-cyber);
   font-size: clamp(2rem, 4vw, 3.4rem);
   font-weight: 900;
   line-height: 1.05;
   text-transform: uppercase;
-  background: linear-gradient(
-    135deg,
-    #fff 0%,
-    var(--cyan) 50%,
-    var(--magenta) 100%
-  );
+  background: linear-gradient(135deg,
+      #fff 0%,
+      var(--cyan) 50%,
+      var(--magenta) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
 .section-sub {
   margin-top: 1rem;
   color: #7b8099;
@@ -181,6 +185,7 @@ body::before {
   backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(0, 240, 255, 0.12);
 }
+
 .nav-brand {
   font-family: var(--font-pixel);
   font-size: 0.85rem;
@@ -190,6 +195,7 @@ body::before {
   align-items: center;
   gap: 0.75rem;
 }
+
 .nav-brand-dot {
   width: 8px;
   height: 8px;
@@ -198,11 +204,13 @@ body::before {
   box-shadow: var(--glow-magenta);
   animation: dot-pulse 1.4s infinite;
 }
+
 .nav-links {
   display: flex;
   gap: 2.5rem;
   list-style: none;
 }
+
 .nav-links a {
   font-family: var(--font-cyber);
   font-size: 0.75rem;
@@ -214,10 +222,12 @@ body::before {
     color 0.2s,
     text-shadow 0.2s;
 }
+
 .nav-links a:hover {
   color: var(--cyan);
   text-shadow: var(--glow-cyan);
 }
+
 .nav-cta {
   font-family: var(--font-pixel);
   font-size: 0.65rem;
@@ -229,15 +239,14 @@ body::before {
   transition:
     background 0.2s,
     box-shadow 0.2s;
-  clip-path: polygon(
-    8px 0,
-    100% 0,
-    100% calc(100% - 8px),
-    calc(100% - 8px) 100%,
-    0 100%,
-    0 8px
-  );
+  clip-path: polygon(8px 0,
+      100% 0,
+      100% calc(100% - 8px),
+      calc(100% - 8px) 100%,
+      0 100%,
+      0 8px);
 }
+
 .nav-cta:hover {
   background: var(--magenta);
   color: #fff;
@@ -250,7 +259,20 @@ body::before {
   height: 100vh;
   min-height: 700px;
   overflow: hidden;
-  background: var(--black);
+  /* brighten the image by layering a subtle white gradient on top */
+  background: linear-gradient(rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.08)), url('/background.png') center/cover no-repeat;
+  background-color: var(--black);
+  background-blend-mode: normal;
+}
+
+/* subtle white wash to further lift the image without affecting text contrast */
+.hero-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.04));
+  mix-blend-mode: screen;
+  pointer-events: none;
 }
 
 /* Full-bleed wrapper — clips the bottom Sketchfab controls bar */
@@ -260,8 +282,36 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden; /* <— this clips the iframe's extra 70px height */
+  overflow: hidden;
+  /* clips the iframe's extra 70px height */
   z-index: 0;
+}
+
+/* Arcade-stage outer shell — fills hero-canvas-wrap */
+.arcade-stage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* The Sketchfab iframe — anchored to the right half of the hero */
+.arcade-stage-frame {
+  position: absolute;
+  /* Extend a touch below to crop the Sketchfab controls bar */
+  top: 0;
+  /* Anchor at 65% so the model sits in the right portion of the hero.
+     translateX(-50%) keeps the iframe symmetrically around that anchor.
+     The mobile breakpoint overrides this to left:0 / transform:none. */
+  left: 70%;
+  transform: translateX(-50%);
+  width: 100%;
+  /* Slightly taller than parent so the bottom bar is hidden by overflow:hidden */
+  height: calc(100% + 80px);
+  border: none;
+  /* Let the page scroll on touch devices; don't trap the finger inside the iframe */
+  touch-action: none;
+  pointer-events: auto;
 }
 
 /* Gradient: solid dark left (text legibility) → transparent right (model shows through) */
@@ -271,23 +321,19 @@ body::before {
   z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(
-      to right,
+    linear-gradient(to right,
       rgba(7, 8, 11, 1) 0%,
       rgba(7, 8, 11, 0.97) 25%,
       rgba(7, 8, 11, 0.8) 42%,
       rgba(7, 8, 11, 0.35) 62%,
       rgba(7, 8, 11, 0.05) 80%,
-      transparent 100%
-    ),
+      transparent 100%),
     /* top & bottom vignette */
-    linear-gradient(
-        to bottom,
-        rgba(7, 8, 11, 0.6) 0%,
-        transparent 12%,
-        transparent 82%,
-        rgba(7, 8, 11, 0.95) 100%
-      );
+    linear-gradient(to bottom,
+      rgba(7, 8, 11, 0.6) 0%,
+      transparent 12%,
+      transparent 82%,
+      rgba(7, 8, 11, 0.95) 100%);
 }
 
 /* decorative neon grid lines on hero bg */
@@ -295,7 +341,8 @@ body::before {
   position: absolute;
   inset: 0;
   z-index: 0;
-  pointer-events: none; /* <— Prevents the grid from stealing mouse drag/rotate events! */
+  pointer-events: none;
+  /* <— Prevents the grid from stealing mouse drag/rotate events! */
   background-image:
     linear-gradient(rgba(0, 240, 255, 0.06) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 0, 127, 0.05) 1px, transparent 1px);
@@ -303,7 +350,8 @@ body::before {
 }
 
 .hero-content {
-  position: absolute; /* floats on top of the full-bleed iframe */
+  position: absolute;
+  /* floats on top of the full-bleed iframe */
   top: 0;
   left: 0;
   bottom: 0;
@@ -328,6 +376,7 @@ body::before {
   align-items: center;
   gap: 0.75rem;
 }
+
 .hero-eyebrow::before {
   content: "";
   display: block;
@@ -345,12 +394,10 @@ body::before {
   line-height: 0.9;
   text-transform: uppercase;
   letter-spacing: -0.03em;
-  background: linear-gradient(
-    170deg,
-    #ffffff 0%,
-    var(--cyan) 45%,
-    var(--magenta) 100%
-  );
+  background: linear-gradient(170deg,
+      #ffffff 0%,
+      var(--cyan) 45%,
+      var(--magenta) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 0 50px rgba(0, 240, 255, 0.3));
@@ -385,23 +432,23 @@ body::before {
   box-shadow: var(--glow-magenta);
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  clip-path: polygon(
-    10px 0,
-    100% 0,
-    100% calc(100%-10px),
-    calc(100%-10px) 100%,
-    0 100%,
-    0 10px
-  );
+  clip-path: polygon(10px 0,
+      100% 0,
+      100% calc(100%-10px),
+      calc(100%-10px) 100%,
+      0 100%,
+      0 10px);
   transition:
     transform 0.2s,
     box-shadow 0.2s;
   display: inline-block;
 }
+
 .btn-primary:hover {
   transform: translateY(-3px) scale(1.02);
   box-shadow: 0 0 30px rgba(255, 0, 127, 0.6);
 }
+
 .btn-secondary {
   font-family: var(--font-pixel);
   font-size: 0.7rem;
@@ -412,20 +459,19 @@ body::before {
   box-shadow: var(--glow-cyan);
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  clip-path: polygon(
-    10px 0,
-    100% 0,
-    100% calc(100%-10px),
-    calc(100%-10px) 100%,
-    0 100%,
-    0 10px
-  );
+  clip-path: polygon(10px 0,
+      100% 0,
+      100% calc(100%-10px),
+      calc(100%-10px) 100%,
+      0 100%,
+      0 10px);
   transition:
     transform 0.2s,
     background 0.2s,
     box-shadow 0.2s;
   display: inline-block;
 }
+
 .btn-secondary:hover {
   transform: translateY(-3px) scale(1.02);
   background: rgba(0, 240, 255, 0.08);
@@ -438,6 +484,7 @@ body::before {
   gap: 2px;
   align-items: stretch;
 }
+
 .countdown-block {
   background: rgba(0, 240, 255, 0.06);
   border: 1px solid rgba(0, 240, 255, 0.2);
@@ -446,6 +493,7 @@ body::before {
   text-align: center;
   position: relative;
 }
+
 .countdown-block::before {
   content: "";
   position: absolute;
@@ -455,6 +503,7 @@ body::before {
   height: 2px;
   background: linear-gradient(90deg, transparent, var(--cyan), transparent);
 }
+
 .countdown-num {
   font-family: var(--font-pixel);
   font-size: 1.6rem;
@@ -463,6 +512,7 @@ body::before {
   line-height: 1;
   display: block;
 }
+
 .countdown-sep {
   display: flex;
   align-items: center;
@@ -472,6 +522,7 @@ body::before {
   font-size: 1.4rem;
   font-weight: 700;
 }
+
 .countdown-lbl {
   font-family: var(--font-cyber);
   font-size: 0.55rem;
@@ -491,6 +542,7 @@ body::before {
   margin-top: 2rem;
   width: 100%;
 }
+
 .hero-stat-item {
   flex: 1;
   padding: 0.9rem 0.5rem;
@@ -500,18 +552,22 @@ body::before {
   backdrop-filter: blur(10px);
   transition: background 0.2s;
 }
+
 .hero-stat-item:last-child {
   border-right: none;
 }
+
 .hero-stat-item:hover {
   background: rgba(0, 240, 255, 0.07);
 }
+
 .stat-val {
   font-family: var(--font-cyber);
   font-size: 1.3rem;
   font-weight: 900;
   color: #fff;
 }
+
 .stat-lbl {
   font-size: 0.75rem;
   color: #5a6080;
@@ -525,79 +581,122 @@ body::before {
   gap: 5rem;
   align-items: center;
 }
+
 .about-visual {
   position: relative;
   aspect-ratio: 1;
-  max-width: 500px;
+  /* Fills the whole grid column — a fixed cap here left dead space between the
+     model and the copy on the right. */
+  width: 100%;
 }
+
+/* Frameless stage: an opaque core that dissolves into the page at the edges,
+   so the model reads on its own backdrop without sitting inside a visible box. */
 .about-visual-inner {
   width: 100%;
   height: 100%;
-  border: 2px solid rgba(0, 240, 255, 0.2);
-  border-radius: 4px;
-  background:
-    radial-gradient(
-      circle at 40% 40%,
-      rgba(0, 240, 255, 0.08),
-      transparent 60%
-    ),
-    radial-gradient(
-      circle at 60% 70%,
-      rgba(255, 0, 127, 0.07),
-      transparent 60%
-    ),
-    rgba(13, 14, 22, 0.9);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  overflow: hidden;
+  background:
+    radial-gradient(ellipse 62% 52% at 50% 40%,
+      rgba(0, 240, 255, 0.13),
+      transparent 72%),
+    radial-gradient(ellipse 55% 45% at 58% 72%,
+      rgba(255, 0, 127, 0.11),
+      transparent 72%),
+    radial-gradient(ellipse 72% 72% at 50% 50%,
+      rgba(9, 10, 18, 0.97) 38%,
+      rgba(9, 10, 18, 0.85) 60%,
+      rgba(9, 10, 18, 0.4) 79%,
+      transparent 93%);
 }
-.about-visual-inner::before {
+
+/* Dissolves the model's sky dome into the page colour so the visual reads as
+   part of the About section rather than a pasted-in panel. */
+.about-visual-inner::after {
   content: "";
   position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(0, 240, 255, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 240, 255, 0.07) 1px, transparent 1px);
-  background-size: 40px 40px;
+  inset: -1px;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(ellipse 76% 76% at 50% 48%,
+      transparent 50%,
+      rgba(11, 12, 16, 0.35) 68%,
+      rgba(11, 12, 16, 0.8) 84%,
+      var(--black) 96%);
 }
-.about-neon-text {
+
+/* The model brings its own opaque sky dome, which would otherwise end in a hard
+   square edge — this vignette dissolves the canvas into the page instead. */
+.about-model-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  cursor: grab;
+  touch-action: pan-y;
+  -webkit-mask-image: radial-gradient(ellipse 88% 88% at 50% 48%,
+      #000 58%,
+      rgba(0, 0, 0, 0.72) 78%,
+      rgba(0, 0, 0, 0.25) 91%,
+      transparent 100%);
+  mask-image: radial-gradient(ellipse 88% 88% at 50% 48%,
+      #000 58%,
+      rgba(0, 0, 0, 0.72) 78%,
+      rgba(0, 0, 0, 0.25) 91%,
+      transparent 100%);
+}
+
+.about-model-canvas:active {
+  cursor: grabbing;
+}
+
+.about-model-caption {
+  position: absolute;
+  bottom: 1.1rem;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  pointer-events: none;
   font-family: var(--font-pixel);
-  font-size: 2rem;
-  line-height: 1.6;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
   color: var(--cyan);
   text-shadow: var(--glow-cyan);
   text-align: center;
-  position: relative;
-  z-index: 1;
 }
-.about-corner {
+
+.about-model-loading {
   position: absolute;
-  width: 24px;
-  height: 24px;
-  border-color: var(--magenta);
-  border-style: solid;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  pointer-events: none;
+  font-family: var(--font-pixel);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  color: var(--cyan);
+  text-shadow: var(--glow-cyan);
 }
-.about-corner.tl {
-  top: -2px;
-  left: -2px;
-  border-width: 3px 0 0 3px;
+
+.about-model-bar {
+  width: 45%;
+  height: 6px;
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  background: rgba(0, 240, 255, 0.06);
 }
-.about-corner.tr {
-  top: -2px;
-  right: -2px;
-  border-width: 3px 3px 0 0;
-}
-.about-corner.bl {
-  bottom: -2px;
-  left: -2px;
-  border-width: 0 0 3px 3px;
-}
-.about-corner.br {
-  bottom: -2px;
-  right: -2px;
-  border-width: 0 3px 3px 0;
+
+.about-model-bar span {
+  display: block;
+  height: 100%;
+  background: var(--cyan);
+  box-shadow: var(--glow-cyan);
+  transition: width 0.25s linear;
 }
 
 .about-stats-row {
@@ -606,6 +705,7 @@ body::before {
   gap: 1rem;
   margin-top: 2.5rem;
 }
+
 .about-stat-card {
   padding: 1.5rem;
   background: var(--card);
@@ -616,10 +716,12 @@ body::before {
     border-color 0.2s,
     box-shadow 0.2s;
 }
+
 .about-stat-card:hover {
   border-color: var(--cyan);
   box-shadow: var(--glow-cyan);
 }
+
 .asc-val {
   font-family: var(--font-cyber);
   font-size: 2rem;
@@ -627,6 +729,7 @@ body::before {
   color: var(--gold);
   text-shadow: var(--glow-gold);
 }
+
 .asc-lbl {
   font-size: 0.85rem;
   color: #6a7090;
@@ -640,6 +743,7 @@ body::before {
   gap: 1.5rem;
   margin-top: 3.5rem;
 }
+
 .track-card {
   background: var(--card);
   border: 2px solid rgba(255, 0, 127, 0.2);
@@ -653,6 +757,7 @@ body::before {
     box-shadow 0.3s;
   cursor: default;
 }
+
 .track-card::before {
   content: "";
   position: absolute;
@@ -664,18 +769,22 @@ body::before {
   transform: scaleX(0);
   transition: transform 0.3s;
 }
+
 .track-card:hover {
   transform: translateY(-8px);
   border-color: var(--magenta);
   box-shadow: var(--glow-magenta);
 }
+
 .track-card:hover::before {
   transform: scaleX(1);
 }
+
 .track-icon {
   font-size: 2.5rem;
   margin-bottom: 1.2rem;
 }
+
 .track-num {
   position: absolute;
   top: 1.5rem;
@@ -684,6 +793,7 @@ body::before {
   font-size: 0.5rem;
   color: rgba(255, 0, 127, 0.3);
 }
+
 .track-tag {
   font-family: var(--font-pixel);
   font-size: 0.5rem;
@@ -693,6 +803,7 @@ body::before {
   margin-bottom: 0.75rem;
   display: block;
 }
+
 .track-name {
   font-family: var(--font-cyber);
   font-size: 1.3rem;
@@ -700,23 +811,27 @@ body::before {
   margin-bottom: 0.9rem;
   color: #fff;
 }
+
 .track-desc {
   font-size: 0.95rem;
   color: #6a7090;
   line-height: 1.65;
 }
+
 .track-hp {
   margin-top: 1.5rem;
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
+
 .hp-label {
   font-family: var(--font-pixel);
   font-size: 0.45rem;
   color: #4a5070;
   white-space: nowrap;
 }
+
 .hp-bar-bg {
   flex: 1;
   height: 5px;
@@ -724,6 +839,7 @@ body::before {
   border-radius: 2px;
   overflow: hidden;
 }
+
 .hp-bar-fill {
   height: 100%;
   background: linear-gradient(90deg, var(--magenta), var(--purple));
@@ -737,6 +853,7 @@ body::before {
   max-width: 860px;
   margin: 4rem auto 0;
 }
+
 .prizes-bg-card {
   background: rgba(10, 11, 18, 0.95);
   border: 2px solid rgba(255, 215, 0, 0.25);
@@ -744,6 +861,7 @@ body::before {
   overflow: hidden;
   box-shadow: 0 0 60px rgba(255, 215, 0, 0.05);
 }
+
 .prizes-header-bar {
   display: flex;
   align-items: center;
@@ -752,6 +870,7 @@ body::before {
   background: rgba(255, 215, 0, 0.06);
   border-bottom: 1px solid rgba(255, 215, 0, 0.15);
 }
+
 .prizes-header-bar span {
   font-family: var(--font-pixel);
   font-size: 0.6rem;
@@ -759,6 +878,7 @@ body::before {
   text-shadow: var(--glow-gold);
   text-transform: uppercase;
 }
+
 .prize-row {
   display: grid;
   grid-template-columns: 60px 1fr auto;
@@ -771,34 +891,42 @@ body::before {
     transform 0.2s;
   cursor: default;
 }
+
 .prize-row:last-child {
   border-bottom: none;
 }
+
 .prize-row:hover {
   background: rgba(255, 215, 0, 0.03);
   transform: translateX(6px);
 }
+
 .prize-rank {
   font-family: var(--font-pixel);
   font-size: 1rem;
   text-align: center;
 }
+
 .prize-row.p1 .prize-rank {
   color: var(--gold);
   text-shadow: var(--glow-gold);
 }
+
 .prize-row.p2 .prize-rank {
   color: #c0c0c0;
   text-shadow: 0 0 8px rgba(192, 192, 192, 0.4);
 }
+
 .prize-row.p3 .prize-rank {
   color: #cd7f32;
   text-shadow: 0 0 8px rgba(205, 127, 50, 0.4);
 }
+
 .prize-row.sp .prize-rank {
   color: var(--cyan);
   text-shadow: var(--glow-cyan);
 }
+
 .prize-info-title {
   font-family: var(--font-cyber);
   font-size: 1rem;
@@ -806,10 +934,12 @@ body::before {
   color: #fff;
   margin-bottom: 0.3rem;
 }
+
 .prize-info-sub {
   font-size: 0.85rem;
   color: #5a6080;
 }
+
 .prize-amount {
   font-family: var(--font-cyber);
   font-size: 1.3rem;
@@ -818,6 +948,7 @@ body::before {
   text-shadow: var(--glow-gold);
   white-space: nowrap;
 }
+
 .prize-row.p1 .prize-amount {
   font-size: 1.6rem;
 }
@@ -830,6 +961,7 @@ body::before {
   flex-direction: column;
   gap: 0;
 }
+
 .timeline-list::before {
   content: "";
   position: absolute;
@@ -840,6 +972,7 @@ body::before {
   background: linear-gradient(to bottom, var(--purple), var(--cyan));
   box-shadow: 0 0 12px rgba(0, 240, 255, 0.2);
 }
+
 .tl-item {
   display: grid;
   grid-template-columns: 140px 40px 1fr;
@@ -848,6 +981,7 @@ body::before {
   padding: 2rem 0;
   position: relative;
 }
+
 .tl-date {
   text-align: right;
   font-family: var(--font-pixel);
@@ -856,12 +990,14 @@ body::before {
   padding-top: 0.25rem;
   text-shadow: var(--glow-gold);
 }
+
 .tl-node {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .tl-dot {
   width: 18px;
   height: 18px;
@@ -872,6 +1008,7 @@ body::before {
   z-index: 1;
   flex-shrink: 0;
 }
+
 .tl-card {
   background: var(--card);
   border: 1px solid var(--border);
@@ -882,11 +1019,13 @@ body::before {
     box-shadow 0.2s,
     transform 0.2s;
 }
+
 .tl-card:hover {
   border-color: var(--cyan);
   box-shadow: var(--glow-cyan);
   transform: translateX(6px);
 }
+
 .tl-level {
   font-family: var(--font-pixel);
   font-size: 0.5rem;
@@ -895,6 +1034,7 @@ body::before {
   text-transform: uppercase;
   letter-spacing: 0.2em;
 }
+
 .tl-title {
   font-family: var(--font-cyber);
   font-size: 1rem;
@@ -902,6 +1042,7 @@ body::before {
   color: #fff;
   margin-bottom: 0.35rem;
 }
+
 .tl-desc {
   font-size: 0.9rem;
   color: #5a6080;
@@ -914,6 +1055,7 @@ body::before {
   flex-direction: column;
   gap: 3rem;
 }
+
 .sponsor-tier-label {
   font-family: var(--font-pixel);
   font-size: 0.55rem;
@@ -923,12 +1065,14 @@ body::before {
   text-transform: uppercase;
   letter-spacing: 0.3em;
 }
+
 .sponsor-row {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
   justify-content: center;
 }
+
 .sponsor-card {
   background: var(--card);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -950,6 +1094,7 @@ body::before {
     color 0.25s,
     box-shadow 0.25s;
 }
+
 .sponsor-card:hover {
   border-color: var(--cyan);
   color: var(--cyan);
@@ -964,12 +1109,14 @@ body::before {
   flex-direction: column;
   gap: 1rem;
 }
+
 .faq-item {
   background: var(--card);
   border: 1px solid rgba(0, 240, 255, 0.12);
   border-radius: 4px;
   overflow: hidden;
 }
+
 .faq-q {
   width: 100%;
   text-align: left;
@@ -984,9 +1131,11 @@ body::before {
   gap: 1rem;
   transition: color 0.2s;
 }
+
 .faq-q:hover {
   color: var(--cyan);
 }
+
 .faq-icon {
   font-family: var(--font-pixel);
   font-size: 0.8rem;
@@ -994,9 +1143,11 @@ body::before {
   flex-shrink: 0;
   transition: transform 0.2s;
 }
+
 .faq-item.open .faq-icon {
   transform: rotate(45deg);
 }
+
 .faq-a {
   max-height: 0;
   overflow: hidden;
@@ -1008,6 +1159,7 @@ body::before {
   color: #5a6080;
   line-height: 1.7;
 }
+
 .faq-item.open .faq-a {
   max-height: 400px;
   padding: 0 1.5rem 1.5rem;
@@ -1016,36 +1168,32 @@ body::before {
 /* ── FOOTER CTA ── */
 .footer-cta {
   background:
-    radial-gradient(
-      ellipse 80% 60% at 50% 50%,
+    radial-gradient(ellipse 80% 60% at 50% 50%,
       rgba(0, 240, 255, 0.06),
-      transparent
-    ),
-    radial-gradient(
-      ellipse 60% 50% at 30% 60%,
+      transparent),
+    radial-gradient(ellipse 60% 50% at 30% 60%,
       rgba(255, 0, 127, 0.05),
-      transparent
-    ),
+      transparent),
     rgba(9, 10, 16, 0.98);
   border-top: 1px solid rgba(0, 240, 255, 0.12);
   text-align: center;
   padding: 7rem 1.5rem 5rem;
 }
+
 .cta-title {
   font-family: var(--font-cyber);
   font-size: clamp(2rem, 5vw, 4rem);
   font-weight: 900;
   text-transform: uppercase;
-  background: linear-gradient(
-    135deg,
-    #fff 0%,
-    var(--cyan) 45%,
-    var(--magenta) 100%
-  );
+  background: linear-gradient(135deg,
+      #fff 0%,
+      var(--cyan) 45%,
+      var(--magenta) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 1.5rem;
 }
+
 .cta-sub {
   color: #5a6080;
   font-size: 1.05rem;
@@ -1054,6 +1202,7 @@ body::before {
   margin-left: auto;
   margin-right: auto;
 }
+
 .footer-bottom {
   margin-top: 5rem;
   padding-top: 2rem;
@@ -1069,6 +1218,7 @@ body::before {
   font-size: 0.85rem;
   color: #3a4060;
 }
+
 .footer-brand {
   font-family: var(--font-pixel);
   font-size: 0.6rem;
@@ -1077,11 +1227,13 @@ body::before {
 
 /* ── ANIMATIONS ── */
 @keyframes dot-pulse {
+
   0%,
   100% {
     opacity: 1;
     transform: scale(1);
   }
+
   50% {
     opacity: 0.5;
     transform: scale(1.3);
@@ -1089,17 +1241,21 @@ body::before {
 }
 
 @keyframes hero-flicker {
+
   0%,
   90%,
   100% {
     filter: drop-shadow(0 0 40px rgba(0, 240, 255, 0.25));
   }
+
   93% {
     filter: drop-shadow(0 0 40px rgba(0, 240, 255, 0.05)) brightness(0.8);
   }
+
   95% {
     filter: drop-shadow(0 0 40px rgba(0, 240, 255, 0.25));
   }
+
   97% {
     filter: drop-shadow(0 0 40px rgba(0, 240, 255, 0.05)) brightness(0.8);
   }
@@ -1109,16 +1265,19 @@ body::before {
   0% {
     width: 95%;
   }
+
   100% {
     width: 55%;
   }
 }
 
 @keyframes float-up {
+
   0%,
   100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-12px);
   }
@@ -1129,87 +1288,138 @@ body::before {
   .about-grid {
     grid-template-columns: 1fr;
   }
+
   .about-visual {
-    max-width: 100%;
-    aspect-ratio: 16/7;
+    /* Stays near-square so the model's sky dome keeps covering the frame —
+       a 16/7 letterbox is wider than the dome and leaves bare corners. */
+    aspect-ratio: 4 / 3;
   }
+
   .tracks-grid {
     grid-template-columns: 1fr 1fr;
   }
+
   .hero-content {
     width: 55%;
     padding: 7rem 2rem 3rem 3rem;
   }
 }
+
 @media (max-width: 768px) {
   .navbar {
     padding: 0.8rem 1.2rem;
   }
+
   .nav-links {
     display: none;
   }
+
   .tracks-grid {
     grid-template-columns: 1fr;
   }
+
   .hero-h1 {
     font-size: clamp(2.5rem, 11vw, 4rem);
   }
+
   .tl-item {
     grid-template-columns: 80px 28px 1fr;
   }
+
   .timeline-list::before {
     left: 80px;
   }
+
   .tl-date {
     font-size: 0.48rem;
   }
+
   .about-stats-row {
     grid-template-columns: 1fr;
   }
+
   .prizes-bg-card {
     border-radius: 0;
   }
+
   .footer-bottom {
     flex-direction: column;
     gap: 1rem;
     text-align: center;
   }
+
   .hero-countdown {
     gap: 1px;
   }
+
   .countdown-block {
     padding: 0.7rem 0.8rem;
     min-width: 60px;
   }
+
   .countdown-num {
     font-size: 1.1rem;
   }
+
   .hero-stats-strip {
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
-  /* Stack hero vertically on mobile */
+
+  /* ── Hero: mobile — keep absolute stack, fix overlay & sizing ── */
+
+  /* Fixed viewport height so hero-canvas-wrap (absolute inset:0) has a real
+     parent height to fill. No flex here — everything stays absolute. */
   .hero-section {
-    flex-direction: column;
-    height: auto;
-    min-height: 100svh;
+    height: 100svh;
+    min-height: 600px;
+    /* display stays the default (block) — flex caused the iframe to lose size */
   }
+
+  /* Canvas wrap: keep absolute fill. Don't block pointer-events here or the
+     iframe child won't receive clicks (CSS pointer-events:none on parent
+     blocks auto on children for many event types). */
+  /* .hero-canvas-wrap: no change needed — stays position:absolute; inset:0 */
+
+  /* Iframe: flush to left edge (no translateX), allow vertical pan for scrolling */
+  .arcade-stage-frame {
+    left: 0;
+    transform: none;
+    /* pan-y lets the finger scroll the page while still rotating the model */
+    touch-action: pan-y;
+    pointer-events: auto;
+  }
+
+  /* Replace the left→right gradient with a top+bottom vignette so the model
+     shows through the centre of the screen instead of being hidden behind
+     the solid-left dark wall. */
+  .hero-overlay {
+    background:
+      linear-gradient(to bottom,
+        rgba(7, 8, 11, 0.75) 0%,
+        rgba(7, 8, 11, 0.25) 25%,
+        rgba(7, 8, 11, 0.10) 50%,
+        rgba(7, 8, 11, 0.25) 75%,
+        rgba(7, 8, 11, 0.85) 100%);
+    pointer-events: none;
+  }
+
+  /* Content: full width, centred, no opaque background — model shows through */
   .hero-content {
     width: 100%;
-    padding: 7rem 1.5rem 2rem;
+    padding: 5rem 1.5rem 3rem;
     align-items: center;
     text-align: center;
-    background: var(--black);
+    /* No background — the overlay gradient above provides the dark wash */
+    background: none;
+    /* Push to the bottom third so the model is visible above */
+    justify-content: flex-end;
   }
-  .hero-model-wrap {
-    width: 100%;
-    height: 60vw;
-    min-height: 280px;
-    box-shadow: none;
-  }
+
   .hero-eyebrow {
     justify-content: center;
   }
+
   .hero-actions {
     justify-content: center;
   }
