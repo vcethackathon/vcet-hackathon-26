@@ -4,8 +4,10 @@ import React, { useRef, useEffect, useState, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
+type ScrollRef = React.RefObject<{ progress: number; speed: number }>;
+
 // ─── 3D PAC-MAN CHARACTER ──────────────────────────────────────────────────
-function PacmanModel({ scrollProgress, scrollSpeed }: { scrollProgress: number; scrollSpeed: number }) {
+function PacmanModel({ scrollRef }: { scrollRef: ScrollRef }) {
   const groupRef = useRef<THREE.Group>(null);
   const topJawRef = useRef<THREE.Mesh>(null);
   const bottomJawRef = useRef<THREE.Mesh>(null);
@@ -14,6 +16,7 @@ function PacmanModel({ scrollProgress, scrollSpeed }: { scrollProgress: number; 
   useFrame((state, delta) => {
     if (!groupRef.current) return;
 
+    const { progress: scrollProgress, speed: scrollSpeed } = scrollRef.current;
     const time = state.clock.getElapsedTime();
 
     // Calculate target X, Y, Z coordinates for Pacman based on scroll progress
@@ -89,7 +92,7 @@ function PacmanModel({ scrollProgress, scrollSpeed }: { scrollProgress: number; 
 }
 
 // ─── POWER PELLETS & ARCADE DOTS ALONG SCROLL PATH ────────────────────────
-function PowerPellets({ scrollProgress }: { scrollProgress: number }) {
+function PowerPellets({ scrollRef }: { scrollRef: ScrollRef }) {
   const dots = useMemo(() => {
     return Array.from({ length: 14 }).map((_, i) => {
       const progress = (i + 1) / 15;
@@ -104,33 +107,40 @@ function PowerPellets({ scrollProgress }: { scrollProgress: number }) {
     });
   }, []);
 
+  const meshRefs = useRef<(THREE.Mesh | null)[]>([]);
+
+  useFrame(() => {
+    const scrollProgress = scrollRef.current.progress;
+    for (let i = 0; i < dots.length; i++) {
+      const mesh = meshRefs.current[i];
+      if (!mesh) continue;
+      mesh.visible = scrollProgress < dots[i].progress - 0.02;
+    }
+  });
+
   return (
     <group>
-      {dots.map((dot) => {
-        const isEaten = scrollProgress >= dot.progress - 0.02;
-        if (isEaten) return null;
-
-        return (
-          <mesh
-            key={dot.id}
-            position={[dot.x, dot.y, dot.z]}
-            scale={dot.isPower ? 0.22 : 0.12}
-          >
-            <sphereGeometry args={[1, 16, 16]} />
-            <meshStandardMaterial
-              color={dot.isPower ? '#00F0FF' : '#FF007F'}
-              emissive={dot.isPower ? '#00F0FF' : '#FF007F'}
-              emissiveIntensity={2.5}
-            />
-          </mesh>
-        );
-      })}
+      {dots.map((dot, i) => (
+        <mesh
+          key={dot.id}
+          ref={(el) => { meshRefs.current[i] = el; }}
+          position={[dot.x, dot.y, dot.z]}
+          scale={dot.isPower ? 0.22 : 0.12}
+        >
+          <sphereGeometry args={[1, 16, 16]} />
+          <meshStandardMaterial
+            color={dot.isPower ? '#00F0FF' : '#FF007F'}
+            emissive={dot.isPower ? '#00F0FF' : '#FF007F'}
+            emissiveIntensity={2.5}
+          />
+        </mesh>
+      ))}
     </group>
   );
 }
 
 // ─── HYPERDRIVE SPACE STARFIELD & TRAIL PARTICLES ──────────────────────────
-function Starfield({ scrollProgress, scrollSpeed }: { scrollProgress: number; scrollSpeed: number }) {
+function Starfield({ scrollRef }: { scrollRef: ScrollRef }) {
   const pointsRef = useRef<THREE.Points>(null);
   const count = 900;
 
@@ -165,19 +175,22 @@ function Starfield({ scrollProgress, scrollSpeed }: { scrollProgress: number; sc
 
   useFrame((state) => {
     if (!pointsRef.current) return;
+    const { progress: scrollProgress, speed: scrollSpeed } = scrollRef.current;
     const time = state.clock.getElapsedTime();
     const positionsAttr = pointsRef.current.geometry.attributes.position;
+    const arr = positionsAttr.array as Float32Array;
 
     // Movement speed responds dynamically to scrolling speed (warp speed travel)
     const baseSpeed = 0.03 + scrollSpeed * 0.9;
+    const step = baseSpeed * 12;
 
     for (let i = 0; i < count; i++) {
-      let z = positionsAttr.getZ(i);
-      z += speeds[i] * baseSpeed * 12;
+      const idx = i * 3 + 2;
+      let z = arr[idx] + speeds[i] * step;
 
       // Wrap around when particles fly past camera
       if (z > 20) z = -25;
-      positionsAttr.setZ(i, z);
+      arr[idx] = z;
     }
 
     positionsAttr.needsUpdate = true;
@@ -241,10 +254,11 @@ function FloatingRetroGeometries() {
 }
 
 // ─── MAIN SPACE STAGE COMPONENT ────────────────────────────────────────────
-function Scene({ scrollProgress, scrollSpeed }: { scrollProgress: number; scrollSpeed: number }) {
+function Scene({ scrollRef }: { scrollRef: ScrollRef }) {
   const cameraRef = useRef<THREE.PerspectiveCamera>(null);
 
   useFrame((state, delta) => {
+    const { progress: scrollProgress, speed: scrollSpeed } = scrollRef.current;
     // Dynamic camera movement along Z axis as you scroll through space
     const targetZ = 8 - scrollProgress * 10;
     const targetY = -scrollProgress * 12;
@@ -266,9 +280,9 @@ function Scene({ scrollProgress, scrollSpeed }: { scrollProgress: number; scroll
       <directionalLight position={[5, 10, 7]} intensity={2.5} color="#00F0FF" />
       <pointLight position={[-5, -5, -5]} intensity={3} color="#FF007F" />
 
-      <Starfield scrollProgress={scrollProgress} scrollSpeed={scrollSpeed} />
-      <PacmanModel scrollProgress={scrollProgress} scrollSpeed={scrollSpeed} />
-      <PowerPellets scrollProgress={scrollProgress} />
+      <Starfield scrollRef={scrollRef} />
+      <PacmanModel scrollRef={scrollRef} />
+      <PowerPellets scrollRef={scrollRef} />
       <FloatingRetroGeometries />
     </>
   );
@@ -276,8 +290,8 @@ function Scene({ scrollProgress, scrollSpeed }: { scrollProgress: number; scroll
 
 export default function ArcadeSpaceCanvas() {
   const [mounted, setMounted] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [scrollSpeed, setScrollSpeed] = useState(0);
+  const scrollRef = useRef({ progress: 0, speed: 0 });
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -296,15 +310,19 @@ export default function ArcadeSpaceCanvas() {
       const dist = Math.abs(currentScrollY - lastScrollY);
       const speed = Math.min(1.5, dist / dt);
 
-      setScrollProgress(progress);
-      setScrollSpeed(speed);
+      scrollRef.current.progress = progress;
+      scrollRef.current.speed = speed;
+
+      if (wrapperRef.current) {
+        wrapperRef.current.style.opacity = progress < 0.05 ? '0.45' : '0.9';
+      }
 
       lastScrollY = currentScrollY;
       lastTime = currentTime;
 
       clearTimeout(speedTimeout);
       speedTimeout = setTimeout(() => {
-        setScrollSpeed(0);
+        scrollRef.current.speed = 0;
       }, 120);
     };
 
@@ -319,22 +337,24 @@ export default function ArcadeSpaceCanvas() {
 
   return (
     <div
+      ref={wrapperRef}
       style={{
         position: 'fixed',
         inset: 0,
         zIndex: 0,
         pointerEvents: 'none',
         overflow: 'hidden',
-        opacity: scrollProgress < 0.05 ? 0.45 : 0.9, // softer at hero, vibrant through rest of sections
+        opacity: 0.45, // softer at hero, vibrant through rest of sections
         transition: 'opacity 0.5s ease',
       }}
     >
       <Canvas
         camera={{ position: [0, 0, 8], fov: 50 }}
         gl={{ antialias: true, alpha: true }}
+        dpr={[1, 1.5]}
         style={{ width: '100%', height: '100%', background: 'transparent' }}
       >
-        <Scene scrollProgress={scrollProgress} scrollSpeed={scrollSpeed} />
+        <Scene scrollRef={scrollRef} />
       </Canvas>
     </div>
   );
