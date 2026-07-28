@@ -343,7 +343,7 @@ export default function ArcadeSpaceCanvas() {
     >
       <Canvas
         camera={{ position: [0, 0, 8], fov: 50 }}
-        dpr={[1, 1.5]}
+        dpr={1}
         gl={{ antialias: false, alpha: true, powerPreference: 'high-performance' }}
         style={{ width: '100%', height: '100%', background: 'transparent' }}
       >
