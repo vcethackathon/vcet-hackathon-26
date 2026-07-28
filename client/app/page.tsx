@@ -10,6 +10,9 @@ import TracksSection from "@/components/sections/TracksSection";
 import PrizesSection from "@/components/sections/PrizesSection";
 import TimelineSection from "@/components/sections/TimelineSection";
 import SponsorsSection from "@/components/sections/SponsorsSection";
+import GuidelinesSection from "@/components/sections/GuidelinesSection";
+import RegisterSection from "@/components/sections/RegisterSection";
+import GallerySection from "@/components/sections/GallerySection";
 import FaqSection from "@/components/sections/FaqSection";
 import FooterSection from "@/components/sections/FooterSection";
 
@@ -69,6 +72,9 @@ export default function Page() {
       <PrizesSection />
       <TimelineSection />
       <SponsorsSection />
+      <GuidelinesSection />
+      <RegisterSection />
+      <GallerySection />
       <FaqSection />
       <FooterSection onInsertCoin={handleInsertCoin} />
     </>

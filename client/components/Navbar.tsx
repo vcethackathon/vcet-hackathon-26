@@ -1,4 +1,13 @@
-const NAV_LINKS = ["About", "Tracks", "Prizes", "Timeline", "Sponsors", "FAQ"] as const;
+const NAV_LINKS = [
+  "About",
+  "Tracks",
+  "Prizes",
+  "Timeline",
+  "Sponsors",
+  "Guidelines",
+  "Gallery",
+  "FAQ",
+] as const;
 
 export default function Navbar() {
   return (

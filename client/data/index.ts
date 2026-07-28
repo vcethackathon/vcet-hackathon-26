@@ -4,3 +4,5 @@ export * from "./timeline";
 export * from "./faq";
 export * from "./sponsors";
 export * from "./hero";
+export * from "./guidelines";
+export * from "./gallery";
