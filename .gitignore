@@ -1,5 +1,6 @@
 # Dependencies
 node_modules/
+**/node_modules/
 .pnp
 .pnp.*
 .yarn/*
@@ -10,9 +11,13 @@ node_modules/
 
 # Next.js & Build outputs
 .next/
+**/.next/
 out/
+**/out/
 build/
+**/build/
 dist/
+**/dist/
 
 # Environment files
 .env
@@ -21,18 +26,25 @@ dist/
 
 # Testing & Coverage
 coverage/
+**/coverage/
 
 # IDE & Editor files
 .vscode/
 .idea/
 *.swp
 *.swo
+*.sublime-workspace
+*.sublime-project
 
 # OS generated files
 .DS_Store
 .DS_Store?
 ._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
+Desktop.ini
 
 # Logs & Debug
 *.log
@@ -41,8 +53,10 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# Vercel & TypeScript
+# Vercel & Turbopack
 .vercel
 .turbo/
 *.tsbuildinfo
-next-env.d.ts
+
+# Tooling / Agent artifacts
+.antigravityignore
