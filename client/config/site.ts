@@ -5,10 +5,15 @@ export const UNSTOP_URL = "https://unstop.com"; // TODO: Fill in exact Unstop ev
 export const SITE_CONFIG = {
   name: "VCET Hackathon 2026",
   tagline: "Arcade – Pixels to Possibilities",
-  subtitle: "From raw code to real impact in a 36-hour arcade matrix.",
+  subtitle: "From raw code to real impact in a 30-hour arcade matrix.",
   dates: "September 4–5, 2026",
   eventStartISO: "2026-09-04T00:00:00+05:30",
   venue: "VCET Campus",
+  email: "vcet.hackathon@vcet.edu.in",
+  socials: {
+    instagram: "https://www.instagram.com/vcet_hackathon26/",
+    linkedin: "https://www.linkedin.com/in/vcet-hackathon/",
+  },
   prizePool: "₹1,00,000",
   unstopUrl: UNSTOP_URL,
   navLinks: [
@@ -22,7 +27,7 @@ export const SITE_CONFIG = {
   stats: [
     { label: "TOTAL PRIZE POOL", value: 100000, prefix: "₹", suffix: "", isCurrency: true },
     { label: "DAYS OF HACKING", value: 2, prefix: "", suffix: " DAYS" },
-    { label: "HOURS OF CODE", value: 36, prefix: "", suffix: "+ HRS" },
+    { label: "HOURS OF CODE", value: 30, prefix: "", suffix: "+ HRS" },
     { label: "EXPECTED HACKERS", value: 500, prefix: "", suffix: "+", isTodo: true },
   ],
   faqItems: [
@@ -40,11 +45,11 @@ export const SITE_CONFIG = {
     },
     {
       q: "DO I NEED TO HAVE A WORKING PROTOTYPE AT SUBMISSION?",
-      a: "Yes! By the end of the 36-hour hacking period, teams are expected to present a functional prototype along with source code and a presentation demo for the judging panel.",
+      a: "Yes! By the end of the 30-hour hacking period, teams are expected to present a functional prototype along with source code and a presentation demo for the judging panel.",
     },
     {
       q: "CAN I BEGIN WORKING ON MY PROJECT BEFORE THE EVENT?",
-      a: "No. All code, design, and implementation must be built during the official 36-hour hacking window. Pre-built projects or code templates are strictly prohibited and subject to disqualification.",
+      a: "No. All code, design, and implementation must be built during the official 30-hour hacking window. Pre-built projects or code templates are strictly prohibited and subject to disqualification.",
     },
     {
       q: "WHAT SHOULD I BRING TO THE VENUE?",

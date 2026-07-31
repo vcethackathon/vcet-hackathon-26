@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
+import { playRegistrationSound, playHoverSound } from "@/utils/sound";
 
 import CRTOverlay from "@/components/CRTOverlay";
 import Navbar from "@/components/Navbar";
@@ -21,37 +22,66 @@ const ArcadeSpaceCanvas = dynamic(
   { ssr: false }
 );
 
-function playCoinSound() {
-  if (typeof window === "undefined") return;
-  try {
-    const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
-    ([
-      [880, 0],
-      [1200, 0.12],
-      [660, 0.24],
-    ] as [number, number][]).forEach(([freq, delay]) => {
-      const osc = ctx.createOscillator();
-      const g = ctx.createGain();
-      osc.type = "square";
-      osc.frequency.value = freq;
-      g.gain.setValueAtTime(0.08, ctx.currentTime + delay);
-      g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + 0.1);
-      osc.connect(g);
-      g.connect(ctx.destination);
-      osc.start(ctx.currentTime + delay);
-      osc.stop(ctx.currentTime + delay + 0.12);
-    });
-  } catch (_) {
-    /* audio not supported */
-  }
-}
-
 export default function Page() {
   const [coinState, setCoinState] = useState<"idle" | "ready">("idle");
 
+  useEffect(() => {
+    let lastHovered: Element | null = null;
+
+    const isRegistrationElement = (el: Element | null): boolean => {
+      if (!el) return false;
+      const target = el.closest("a, button");
+      if (!target) return false;
+
+      const href = target.getAttribute("href") || "";
+      const text = target.textContent?.toUpperCase() || "";
+      return (
+        href.includes("unstop") ||
+        href === "#register" ||
+        target.id === "register" ||
+        text.includes("REGISTER") ||
+        text.includes("INSERT COIN") ||
+        target.classList.contains("btn-arcade-magenta") ||
+        target.classList.contains("btn-arcade-gold") ||
+        target.classList.contains("prize-cta")
+      );
+    };
+
+    const handleGlobalClick = (e: MouseEvent) => {
+      if (isRegistrationElement(e.target as Element)) {
+        playRegistrationSound();
+      }
+    };
+
+    const handleGlobalMouseOver = (e: MouseEvent) => {
+      const target = (e.target as Element)?.closest("a, button");
+      if (target && target !== lastHovered && isRegistrationElement(target)) {
+        lastHovered = target;
+        playHoverSound();
+      }
+    };
+
+    const handleGlobalMouseOut = (e: MouseEvent) => {
+      const target = (e.target as Element)?.closest("a, button");
+      if (target === lastHovered) {
+        lastHovered = null;
+      }
+    };
+
+    window.addEventListener("click", handleGlobalClick, { capture: true });
+    window.addEventListener("mouseover", handleGlobalMouseOver, { capture: true });
+    window.addEventListener("mouseout", handleGlobalMouseOut, { capture: true });
+
+    return () => {
+      window.removeEventListener("click", handleGlobalClick, { capture: true });
+      window.removeEventListener("mouseover", handleGlobalMouseOver, { capture: true });
+      window.removeEventListener("mouseout", handleGlobalMouseOut, { capture: true });
+    };
+  }, []);
+
   const handleInsertCoin = () => {
     setCoinState("ready");
-    playCoinSound();
+    playRegistrationSound();
   };
 
   return (

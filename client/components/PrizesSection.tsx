@@ -4,6 +4,7 @@ import { useState, type CSSProperties } from 'react';
 import { motion } from 'framer-motion';
 import { Coins, Crown, ExternalLink, Medal, Star, Trophy } from 'lucide-react';
 import { UNSTOP_URL } from '@/config/site';
+import { playRegistrationSound, playHoverSound } from '@/utils/sound';
 import './prizeCabinet.css';
 import MysteryBlockViewer from './MysteryBlockViewer';
 
@@ -147,7 +148,14 @@ export default function PrizesSection() {
 
         <div className="prize-footer">
           <p>Select a reward to see its bounty. Official certificates are provided to all valid submissions.</p>
-          <a href={UNSTOP_URL} target="_blank" rel="noopener noreferrer" className="btn-arcade-gold prize-cta">
+          <a
+            href={UNSTOP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={playRegistrationSound}
+            onMouseEnter={playHoverSound}
+            className="btn-arcade-gold prize-cta"
+          >
             CLAIM YOUR SHARE <ExternalLink size={15} />
           </a>
         </div>

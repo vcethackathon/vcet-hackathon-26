@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import Countdown from "@/components/ui/Countdown";
 import { UNSTOP_URL } from "@/config/site";
 import { ExternalLink } from "lucide-react";
+import { playRegistrationSound, playHoverSound } from "@/utils/sound";
 
 const ArcadeStage = dynamic(() => import("@/components/ArcadeStage"), {
   ssr: false,
@@ -32,7 +33,7 @@ export default function HeroSection({ coinState, onInsertCoin }: HeroSectionProp
       <div className="hero-content">
         <div className="hero-eyebrow mb-3">
           <span className="font-pixel text-[10px] sm:text-xs text-[#00F0FF] tracking-wider uppercase">
-            — VCET — ARCADE EDITION — 2026
+            VCET ARCADE EDITION 2026
           </span>
         </div>
 
@@ -56,7 +57,11 @@ export default function HeroSection({ coinState, onInsertCoin }: HeroSectionProp
             href={UNSTOP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={onInsertCoin}
+            onClick={(e) => {
+              playRegistrationSound();
+              onInsertCoin();
+            }}
+            onMouseEnter={playHoverSound}
             className="btn-arcade-magenta px-6 py-3.5 text-xs tracking-wider flex items-center gap-2 rounded-none font-bold"
           >
             <span>▶ REGISTER ON UNSTOP</span>

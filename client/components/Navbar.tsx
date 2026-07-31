@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { SITE_CONFIG, UNSTOP_URL } from '@/config/site';
 import { Menu, X, ExternalLink } from 'lucide-react';
+import { playRegistrationSound, playHoverSound } from '@/utils/sound';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -63,6 +64,8 @@ export default function Navbar() {
               href={UNSTOP_URL}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={playRegistrationSound}
+              onMouseEnter={playHoverSound}
               className="btn-arcade-magenta px-4 py-2 text-[11px] rounded-none flex items-center gap-2"
             >
               <span>REGISTER</span>
@@ -76,6 +79,8 @@ export default function Navbar() {
               href={UNSTOP_URL}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={playRegistrationSound}
+              onMouseEnter={playHoverSound}
               className="btn-arcade-magenta px-3 py-1.5 text-[10px] flex items-center gap-1"
             >
               <span>REGISTER</span>
@@ -109,6 +114,11 @@ export default function Navbar() {
               href={UNSTOP_URL}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => {
+                playRegistrationSound();
+                setMobileMenuOpen(false);
+              }}
+              onMouseEnter={playHoverSound}
               className="btn-arcade-magenta w-full py-3 text-xs flex items-center justify-center gap-2"
             >
               <span>REGISTER ON UNSTOP</span>

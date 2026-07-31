@@ -17,7 +17,7 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: 'VCET Hackathon 2026 | Arcade – Pixels to Possibilities',
-  description: 'Join the ultimate 36-hour college hackathon at VCET Campus. ₹1,00,000 Prize Pool. Transform pixels into real-world possibilities on Sep 4–5, 2026.',
+  description: 'Join the ultimate 30-hour college hackathon at VCET Campus. ₹1,00,000 Prize Pool. Transform pixels into real-world possibilities on Sep 4–5, 2026.',
   keywords: ['VCET Hackathon', 'Arcade', 'College Hackathon', 'Coding Competition', 'Unstop', 'Prize Pool'],
 };
 

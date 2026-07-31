@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { UNSTOP_URL, SITE_CONFIG } from '@/config/site';
 import { ExternalLink, ChevronDown, Calendar, MapPin, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { playRegistrationSound, playHoverSound } from '@/utils/sound';
 
 interface TimeLeft {
   days: number;
@@ -152,6 +153,8 @@ export default function Hero() {
             href={UNSTOP_URL}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={playRegistrationSound}
+            onMouseEnter={playHoverSound}
             className="btn-arcade-magenta px-8 py-4 text-xs sm:text-sm tracking-wider flex items-center gap-3 rounded-none text-white font-bold"
           >
             <span>REGISTER ON UNSTOP</span>
