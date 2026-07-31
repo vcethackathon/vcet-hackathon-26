@@ -3,26 +3,24 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
 
+import CRTOverlay from "@/components/CRTOverlay";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/sections/HeroSection";
 import AboutSection from "@/components/sections/AboutSection";
-import TracksSection from "@/components/sections/TracksSection";
-import PrizesSection from "@/components/sections/PrizesSection";
-import TimelineSection from "@/components/sections/TimelineSection";
-import SponsorsSection from "@/components/sections/SponsorsSection";
-import GuidelinesSection from "@/components/sections/GuidelinesSection";
-import RegisterSection from "@/components/sections/RegisterSection";
-import GallerySection from "@/components/sections/GallerySection";
-import FaqSection from "@/components/sections/FaqSection";
-import FooterSection from "@/components/sections/FooterSection";
+import StatsStrip from "@/components/StatsStrip";
+import TracksSection from "@/components/TracksSection";
+import TimelineSection from "@/components/TimelineSection";
+import PrizesSection from "@/components/PrizesSection";
+import SponsorsMarquee from "@/components/SponsorsMarquee";
+import FaqSection from "@/components/FaqSection";
+import Footer from "@/components/Footer";
 
-// Fixed 3D background canvas — lazy-loaded, no SSR
+// Fixed 3D background space canvas — lazy-loaded, no SSR
 const ArcadeSpaceCanvas = dynamic(
   () => import("@/components/ArcadeSpaceCanvas"),
   { ssr: false }
 );
 
-// ─── Coin-insert sound effect ──────────────────────────────────────────────
 function playCoinSound() {
   if (typeof window === "undefined") return;
   try {
@@ -48,7 +46,6 @@ function playCoinSound() {
   }
 }
 
-// ─── Page ──────────────────────────────────────────────────────────────────
 export default function Page() {
   const [coinState, setCoinState] = useState<"idle" | "ready">("idle");
 
@@ -58,25 +55,42 @@ export default function Page() {
   };
 
   return (
-    <>
-      {/* Fixed 3D space background that reacts to scroll */}
+    <main className="relative min-h-screen bg-[#0B0C10] text-[#F3F4F6] overflow-hidden selection:bg-[#FF007F] selection:text-white">
+      {/* 3D background space canvas */}
       <ArcadeSpaceCanvas />
 
-      {/* Sticky navigation */}
+      {/* Retro CRT Scanlines & Vignette Overlay */}
+      <CRTOverlay />
+
+      {/* Sticky Navigation Bar */}
       <Navbar />
 
-      {/* Page sections */}
+      {/* 1. 3D Arcade Cabinet Hero Section */}
       <HeroSection coinState={coinState} onInsertCoin={handleInsertCoin} />
+
+      {/* 2. 3D Pac-Man About Section */}
       <AboutSection />
+
+      {/* 3. Scoreboard Stats Strip */}
+      <StatsStrip />
+
+      {/* 4. Tracks Section */}
       <TracksSection />
-      <PrizesSection />
+
+      {/* 5. Timeline / Level Progression */}
       <TimelineSection />
-      <SponsorsSection />
-      <GuidelinesSection />
-      <RegisterSection />
-      <GallerySection />
+
+      {/* 6. Prizes Section */}
+      <PrizesSection />
+
+      {/* 7. Sponsors Marquee */}
+      <SponsorsMarquee />
+
+      {/* 8. FAQ Section */}
       <FaqSection />
-      <FooterSection onInsertCoin={handleInsertCoin} />
-    </>
+
+      {/* 9. Footer */}
+      <Footer />
+    </main>
   );
 }

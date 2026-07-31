@@ -3,8 +3,8 @@ export interface HeroStat {
   lbl: string;
 }
 
-/** Target date for the live countdown timer */
-export const HACKATHON_DATE = new Date("2025-10-13T09:00:00+05:30");
+/** Target date for the live countdown timer — September 4, 2026 */
+export const HACKATHON_DATE = new Date("2026-09-04T08:30:00+05:30");
 
 export const HERO_STATS: HeroStat[] = [
   { val: "30H", lbl: "Live Hacking" },
