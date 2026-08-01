@@ -1,0 +1,171 @@
+/* ═══════════════════════════════════════════════════════
+   Playable Arcade Timeline – Animations
+   Respects prefers-reduced-motion.
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Keyframes ── */
+
+@keyframes mascotIdle {
+  0%, 100% {
+    transform: translateY(0) scaleY(1);
+  }
+  50% {
+    transform: translateY(-4px) scaleY(0.96);
+  }
+}
+
+@keyframes mascotJump {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  40% {
+    transform: translateY(-24px) scale(1.15) rotate(-6deg);
+  }
+  70% {
+    transform: translateY(-10px) scale(1.05) rotate(3deg);
+  }
+  100% {
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes droneHover {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-6px) translateX(4px);
+  }
+  75% {
+    transform: translateY(4px) translateX(-4px);
+  }
+}
+
+@keyframes coinSpin {
+  0%, 100% {
+    transform: scaleX(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scaleX(0.2);
+    filter: brightness(1.7);
+  }
+}
+
+@keyframes cloudDriftSlow {
+  0% {
+    transform: translateX(-20px);
+  }
+  100% {
+    transform: translateX(40px);
+  }
+}
+
+@keyframes landmarkPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 16px rgba(255, 0, 127, 0.7));
+  }
+}
+
+@keyframes activeRouteGlow {
+  0%, 100% {
+    box-shadow:
+      0 0 12px rgba(0, 240, 255, 0.6),
+      inset 0 0 8px rgba(0, 240, 255, 0.4);
+    background: linear-gradient(180deg, #00F0FF 0%, #FF007F 100%);
+  }
+  50% {
+    box-shadow:
+      0 0 24px rgba(255, 0, 127, 0.8),
+      inset 0 0 14px rgba(255, 0, 127, 0.6);
+    background: linear-gradient(180deg, #FF007F 0%, #00F0FF 100%);
+  }
+}
+
+@keyframes activeCardPulse {
+  0%, 100% {
+    box-shadow: 0 0 16px rgba(0, 240, 255, 0.4), 4px 4px 0px #000;
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(255, 0, 127, 0.6), 6px 6px 0px #000;
+  }
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes starTwinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.9; }
+}
+
+/* ── Animation Classes ── */
+
+.animate-mascot-idle {
+  animation: mascotIdle 2.4s ease-in-out infinite;
+}
+
+.animate-mascot-jump {
+  animation: mascotJump 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.animate-drone-hover {
+  animation: droneHover 4s ease-in-out infinite;
+}
+
+.animate-coin-spin {
+  animation: coinSpin 2s ease-in-out infinite;
+}
+
+.animate-cloud-drift-slow {
+  animation: cloudDriftSlow 18s ease-in-out infinite alternate;
+}
+
+.animate-landmark-pulse {
+  animation: landmarkPulse 3s ease-in-out infinite;
+}
+
+.wm-active-route-glow {
+  animation: activeRouteGlow 3s ease-in-out infinite;
+}
+
+.wm-active-card-pulse {
+  animation: activeCardPulse 2.5s ease-in-out infinite;
+}
+
+.animate-tooltip {
+  animation: tooltipFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-star-twinkle {
+  animation: starTwinkle 3s ease-in-out infinite;
+}
+
+
+/* ── Reduced Motion Override ── */
+@media (prefers-reduced-motion: reduce) {
+  .animate-mascot-idle,
+  .animate-mascot-jump,
+  .animate-drone-hover,
+  .animate-coin-spin,
+  .animate-cloud-drift-slow,
+  .animate-landmark-pulse,
+  .wm-active-route-glow,
+  .wm-active-card-pulse,
+  .animate-tooltip,
+  .animate-star-twinkle {
+    animation: none !important;
+  }
+
+}
