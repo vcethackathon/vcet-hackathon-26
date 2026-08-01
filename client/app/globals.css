@@ -739,3 +739,15 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* ── RUPEE SYMBOL FIX: align ₹ vertically with pixel-font numbers ── */
+.rupee {
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 0.82em;
+  line-height: 1;
+  margin-right: 0.04em;
+  position: relative;
+  top: -0.05em;
+}

@@ -61,7 +61,7 @@ export default function AboutSection() {
             </p>
 
             <p className="text-gray-400">
-              Fuel your passion, collaborate with top talent across India, and present your creation before industry leaders to claim your share of the <strong className="text-[#FFD700]">₹85,000 jackpot</strong>. Insert your coin, assemble your squad, and press start!
+              Fuel your passion, collaborate with top talent across India, and present your creation before industry leaders to claim your share of the <strong className="text-[#FFD700]"><span className="rupee">₹</span>85,000 jackpot</strong>. Insert your coin, assemble your squad, and press start!
             </p>
           </motion.div>
 

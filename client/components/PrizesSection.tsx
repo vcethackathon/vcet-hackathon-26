@@ -20,11 +20,11 @@ type Prize = {
 };
 
 const prizes: Prize[] = [
-  { rank: '2ND', label: 'HIGH SCORE', amount: '₹20,000', accent: '#D8E1F0', glow: 'rgba(216,225,240,0.52)', icon: 'trophy', art: '/prize-silver-trophy.png', className: 'silver-podium' },
-  { rank: '1ST', label: 'BOSS CLEAR', amount: '₹50,000', accent: '#FFD700', glow: 'rgba(255,215,0,0.58)', icon: 'crown', art: '/prize-gold-trophy.png', className: 'champion-podium' },
-  { rank: '3RD', label: 'BONUS STAGE', amount: '₹5,000', accent: '#C7854B', glow: 'rgba(199,133,75,0.48)', icon: 'trophy', art: '/prize-bronze-trophy.png', className: 'bronze-podium' },
-  { rank: '4TH', label: 'BONUS STAGE', amount: '₹5,000', accent: '#C7854B', glow: 'rgba(199,133,75,0.48)', icon: 'trophy', art: '/prize-bronze-trophy.png', className: 'bronze-podium' },
-  { rank: '5TH', label: 'BONUS STAGE', amount: '₹5,000', accent: '#C7854B', glow: 'rgba(199,133,75,0.48)', icon: 'trophy', art: '/prize-bronze-trophy.png', className: 'bronze-podium' },
+  { rank: '2ND', label: 'HIGH SCORE', amount: '20,000', accent: '#D8E1F0', glow: 'rgba(216,225,240,0.52)', icon: 'trophy', art: '/prize-silver-trophy.png', className: 'silver-podium' },
+  { rank: '1ST', label: 'BOSS CLEAR', amount: '50,000', accent: '#FFD700', glow: 'rgba(255,215,0,0.58)', icon: 'crown', art: '/prize-gold-trophy.png', className: 'champion-podium' },
+  { rank: '3RD', label: 'BONUS STAGE', amount: '5,000', accent: '#C7854B', glow: 'rgba(199,133,75,0.48)', icon: 'trophy', art: '/prize-bronze-trophy.png', className: 'bronze-podium' },
+  { rank: '4TH', label: 'BONUS STAGE', amount: '5,000', accent: '#C7854B', glow: 'rgba(199,133,75,0.48)', icon: 'trophy', art: '/prize-bronze-trophy.png', className: 'bronze-podium' },
+  { rank: '5TH', label: 'BONUS STAGE', amount: '5,000', accent: '#C7854B', glow: 'rgba(199,133,75,0.48)', icon: 'trophy', art: '/prize-bronze-trophy.png', className: 'bronze-podium' },
 ];
 
 function PrizeIcon({ type, color }: { type: Prize['icon']; color: string }) {
@@ -69,7 +69,7 @@ export default function PrizesSection() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
           <span className="vault-kicker">TOTAL PRIZE POOL</span>
-          <strong>₹85,000</strong>
+          <strong><span className="rupee">₹</span>85,000</strong>
           <span className="vault-caption">Rewards unlocked for the top five teams</span>
           <div className="vault-status"><i /> LIVE REWARD BOARD</div>
         </motion.div>
@@ -82,7 +82,7 @@ export default function PrizesSection() {
           style={cardStyle(champion)}
           onClick={() => togglePrize(championIndex)}
           aria-expanded={selectedPrize === championIndex}
-          aria-label={`1ST position, ${champion.amount}. ${selectedPrize === championIndex ? 'Hide' : 'Show'} reward detail.`}
+          aria-label={`1ST position, ₹${champion.amount}. ${selectedPrize === championIndex ? 'Hide' : 'Show'} reward detail.`}
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.18 }}
@@ -92,7 +92,7 @@ export default function PrizesSection() {
           <div className="champion-copy">
             <span className="reward-eyebrow"><Crown size={16} fill="currentColor" /> GRAND PRIZE</span>
             <span className="champion-rank">{champion.rank} / {champion.label}</span>
-            <strong>{champion.amount}</strong>
+            <strong><span className="rupee">₹</span>{champion.amount}</strong>
             <span className="reward-action">{selectedPrize === championIndex ? 'CLOSE DETAILS' : 'VIEW REWARD DETAILS'} <span aria-hidden="true">↗</span></span>
           </div>
           <div className="champion-art" aria-hidden="true">
@@ -123,14 +123,14 @@ export default function PrizesSection() {
                   transition={{ delay: 0.12 + index * 0.06, duration: 0.46, ease: [0.22, 1, 0.36, 1] }}
                   onClick={() => togglePrize(index)}
                   aria-expanded={expanded}
-                  aria-label={`${prize.rank} position, ${prize.amount}. ${expanded ? 'Hide' : 'Show'} reward detail.`}
+                  aria-label={`${prize.rank} position, ₹${prize.amount}. ${expanded ? 'Hide' : 'Show'} reward detail.`}
                 >
                   <span className="reward-card-top"><span>{prize.rank}</span><span>{expanded ? 'CLOSE' : 'DETAILS'}</span></span>
                   <div className="reward-card-icon">
                     {prize.art ? <img src={prize.art} alt="" draggable={false} /> : <PrizeIcon type={prize.icon} color={prize.accent} />}
                   </div>
                   <span className="reward-label">{prize.label}</span>
-                  <strong>{prize.amount}</strong>
+                  <strong><span className="rupee">₹</span>{prize.amount}</strong>
                   <motion.span
                     className="reward-detail"
                     initial={false}
