@@ -14,9 +14,8 @@ const HIDDEN_NODES = /Floor1/i;
 // across — letting it into the fit maths would shrink the characters to nothing.
 const BACKDROP_MATERIALS = ['finalBackground'];
 
-// World-space width the characters are scaled to fill inside the card. Kept a
-// little under the ~3.84 visible extent so nothing clips as the scene sways.
-const FIT = 3.25;
+// World-space width the characters are scaled to fill inside the card.
+const FIT = 4.6;
 
 function materialNames(obj: THREE.Object3D) {
   const mat = (obj as THREE.Mesh).material;
