@@ -65,7 +65,7 @@ export default function StatsStrip() {
                 <div className="flex items-center justify-center gap-3 mb-3">
                   <span className="text-3xl">💰</span>
                   <div className="font-pixel text-4xl sm:text-5xl text-[#FFD700] tracking-tight drop-shadow-[0_0_12px_rgba(255,215,0,0.5)]">
-                    ₹85,000
+                    <span className="rupee">₹</span>85,000
                   </div>
                 </div>
                 <div className="font-pixel text-xs text-[#00F0FF] tracking-[0.2em] uppercase">
