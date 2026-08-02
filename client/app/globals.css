@@ -39,13 +39,11 @@
 }
 
 .wm-scanlines {
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 0, 0, 0.08) 2px,
-    rgba(0, 0, 0, 0.08) 4px
-  );
+  background: repeating-linear-gradient(0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.08) 2px,
+      rgba(0, 0, 0, 0.08) 4px);
   pointer-events: none;
 }
 
@@ -64,12 +62,10 @@
 /* Route segment base */
 .wm-route-segment {
   position: relative;
-  background: linear-gradient(
-    180deg,
-    var(--wm-route-cyan) 0%,
-    #00B8CC 50%,
-    var(--wm-route-cyan) 100%
-  );
+  background: linear-gradient(180deg,
+      var(--wm-route-cyan) 0%,
+      #00B8CC 50%,
+      var(--wm-route-cyan) 100%);
   border: 3px solid #061220;
   image-rendering: pixelated;
 }
@@ -82,13 +78,11 @@
   left: -4px;
   right: -4px;
   height: 8px;
-  background: repeating-linear-gradient(
-    90deg,
-    var(--wm-grass-green) 0px,
-    var(--wm-grass-green) 8px,
-    var(--wm-grass-dark) 8px,
-    var(--wm-grass-dark) 12px
-  );
+  background: repeating-linear-gradient(90deg,
+      var(--wm-grass-green) 0px,
+      var(--wm-grass-green) 8px,
+      var(--wm-grass-dark) 8px,
+      var(--wm-grass-dark) 12px);
   image-rendering: pixelated;
   z-index: 2;
 }
@@ -187,15 +181,11 @@ body {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  background: linear-gradient(
-    rgba(18, 16, 16, 0) 50%, 
-    rgba(0, 0, 0, 0.25) 50%
-  ), linear-gradient(
-    90deg,
-    rgba(255, 0, 0, 0.03),
-    rgba(0, 255, 0, 0.01),
-    rgba(0, 0, 255, 0.03)
-  );
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%,
+      rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg,
+      rgba(255, 0, 0, 0.03),
+      rgba(0, 255, 0, 0.01),
+      rgba(0, 0, 255, 0.03));
   background-size: 100% 4px, 6px 100%;
   z-index: 15;
 }
@@ -222,15 +212,19 @@ body {
   0% {
     text-shadow: 2px 0 0 var(--hot-magenta), -2px 0 0 var(--arcade-cyan);
   }
+
   25% {
     text-shadow: -2px 0 0 var(--hot-magenta), 2px 0 0 var(--arcade-cyan);
   }
+
   50% {
     text-shadow: 2px -2px 0 var(--quarter-gold), -2px 2px 0 var(--neon-purple);
   }
+
   75% {
     text-shadow: -2px 2px 0 var(--hot-magenta), 2px -2px 0 var(--arcade-cyan);
   }
+
   100% {
     text-shadow: 2px 0 0 var(--hot-magenta), -2px 0 0 var(--arcade-cyan);
   }
@@ -242,8 +236,16 @@ body {
 
 /* Keyframe Blinking for Press Start prompt */
 @keyframes blinkPrompt {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
+
+  0%,
+  49% {
+    opacity: 1;
+  }
+
+  50%,
+  100% {
+    opacity: 0;
+  }
 }
 
 .animate-blink {
@@ -252,8 +254,13 @@ body {
 
 /* Marquee Infinite Keyframe */
 @keyframes marquee {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .animate-marquee {
@@ -297,10 +304,12 @@ body {
 .arcade-stage-frame {
   position: absolute;
   top: 0;
-  left: 36%;
-  right: -4%;
-  width: 68%;
-  height: 100%;
+  left: 70%;
+  /* Push the smaller iframe to the right half of the screen */
+  transform: translateX(-50%);
+  width: 100%;
+  /*Controls horizontal scale. Higher % = zoomed in more.*/
+  height: calc(100% + 80px);
   border: none;
   background: transparent;
   touch-action: manipulation;
@@ -385,7 +394,7 @@ body {
   pointer-events: none;
 }
 
-.hero-content > * {
+.hero-content>* {
   pointer-events: auto;
 }
 
@@ -697,9 +706,11 @@ body {
   .about-grid {
     grid-template-columns: 1fr;
   }
+
   .about-visual {
     aspect-ratio: 4 / 3;
   }
+
   .hero-content {
     width: 58%;
     padding: 6rem 2rem 3rem 2.5rem;
@@ -710,20 +721,24 @@ body {
   .arcade-stage {
     height: 100%;
   }
+
   .arcade-stage-frame {
     left: 50%;
     transform: translateX(-50%) scale(1.1);
-    width: 140%;
+    width: 100%;
     height: 100%;
     pointer-events: none;
   }
+
   .hero-section {
     height: 100svh;
     min-height: 600px;
   }
+
   .hero-h1 {
     font-size: clamp(2.5rem, 11vw, 4rem);
   }
+
   .hero-content {
     width: 100%;
     padding: 5rem 1.5rem 3rem;
@@ -732,9 +747,13 @@ body {
     background: none;
     justify-content: flex-end;
   }
-  .hero-eyebrow, .hero-actions, .hero-countdown {
+
+  .hero-eyebrow,
+  .hero-actions,
+  .hero-countdown {
     justify-content: center;
   }
+
   .about-stats-row {
     grid-template-columns: 1fr;
   }
