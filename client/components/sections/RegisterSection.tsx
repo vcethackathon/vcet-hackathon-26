@@ -2,12 +2,14 @@
 
 import { useState } from "react";
 import SectionHeader from "@/components/ui/SectionHeader";
+import { playRegistrationSound, playHoverSound } from "@/utils/sound";
 
 export default function RegisterSection() {
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    playRegistrationSound();
     setSubmitted(true);
   };
 
@@ -89,7 +91,12 @@ export default function RegisterSection() {
           />
         </div>
 
-        <button type="submit" className="btn-primary" style={{ marginTop: "1rem" }}>
+        <button
+          type="submit"
+          className="btn-primary"
+          style={{ marginTop: "1rem" }}
+          onMouseEnter={playHoverSound}
+        >
           {submitted ? "Registered!" : "Insert Coin to Register"}
         </button>
       </form>

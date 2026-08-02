@@ -1,3 +1,5 @@
+import { playRegistrationSound, playHoverSound } from "@/utils/sound";
+
 interface FooterSectionProps {
   onInsertCoin: () => void;
 }
@@ -30,10 +32,18 @@ export default function FooterSection({ onInsertCoin }: FooterSectionProps) {
           flexWrap: "wrap",
         }}
       >
-        <a href="#register" className="btn-primary" onClick={onInsertCoin}>
+        <a
+          href="#register"
+          className="btn-primary"
+          onClick={() => {
+            playRegistrationSound();
+            onInsertCoin();
+          }}
+          onMouseEnter={playHoverSound}
+        >
           ▶ INSERT COIN — JOIN
         </a>
-        <a href="mailto:hackathon@vcet.edu.in" className="btn-secondary">
+        <a href="mailto:vcet.hackathon@vcet.edu.in" className="btn-secondary">
           ✉ CONTACT US
         </a>
       </div>
