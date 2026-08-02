@@ -26,22 +26,22 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         isScrolled
-          ? 'bg-[#0B0C10]/95 backdrop-blur-md border-b border-[#FF007F]/30 py-2.5 shadow-lg shadow-black/80'
-          : 'bg-gradient-to-b from-black/80 via-black/40 to-transparent py-4'
+          ? 'bg-[#0B0C10]/95 backdrop-blur-md border-b border-[#FF007F]/30 py-1 shadow-lg shadow-black/80'
+          : 'bg-gradient-to-b from-black/80 via-black/40 to-transparent pt-1 pb-3'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a
-            href="#"
+            href="/"
             className="flex items-center group shrink-0 py-1 transition-transform duration-200 hover:scale-105"
             aria-label="VCET Hackathon 2026 Home"
           >
             <img
               src="/logo.png"
               alt="VCET Hackathon 2026 Logo"
-              className="h-11 sm:h-14 md:h-16 lg:h-18 w-auto object-contain drop-shadow-[0_0_10px_rgba(255,0,127,0.35)] group-hover:drop-shadow-[0_0_14px_rgba(0,240,255,0.7)] transition-all duration-300"
+              className="h-16 sm:h-20 md:h-24 lg:h-28 w-auto object-contain drop-shadow-[0_0_10px_rgba(255,0,127,0.35)] group-hover:drop-shadow-[0_0_14px_rgba(0,240,255,0.7)] transition-all duration-300"
             />
           </a>
 
