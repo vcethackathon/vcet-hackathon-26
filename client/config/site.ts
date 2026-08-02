@@ -28,7 +28,7 @@ export const SITE_CONFIG = {
     { label: "TOTAL PRIZE POOL", value: 100000, prefix: "₹", suffix: "", isCurrency: true },
     { label: "DAYS OF HACKING", value: 2, prefix: "", suffix: " DAYS" },
     { label: "HOURS OF CODE", value: 30, prefix: "", suffix: "+ HRS" },
-    { label: "EXPECTED HACKERS", value: 500, prefix: "", suffix: "+", isTodo: true },
+    { label: "EXPECTED PARTICIPANTS", value: 200, prefix: "", suffix: "+" },
   ],
   faqItems: [
     {
