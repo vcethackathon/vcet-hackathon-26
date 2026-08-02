@@ -148,16 +148,6 @@ export default function PrizesSection() {
 
         <div className="prize-footer">
           <p>Select a reward to see its bounty. Official certificates are provided to all valid submissions.</p>
-          <a
-            href={UNSTOP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={playRegistrationSound}
-            onMouseEnter={playHoverSound}
-            className="btn-arcade-gold prize-cta"
-          >
-            CLAIM YOUR SHARE <ExternalLink size={15} />
-          </a>
         </div>
       </div>
     </section>

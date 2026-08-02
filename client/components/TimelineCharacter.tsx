@@ -1,55 +1,77 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-type CharacterConfig = {
-  src: string;
-  alt: string;
-  className: string;
-  needsBlueKey?: boolean;
-};
+const SpaceInvader = ({ color = '#00F0FF', className = '' }: { color?: string, className?: string }) => (
+  <svg viewBox="0 0 11 8" className={`w-full h-full drop-shadow-[0_0_12px_${color}] ${className}`} style={{ shapeRendering: 'crispEdges' }}>
+    <g fill={color}>
+      <rect x="2" y="0" width="1" height="1" />
+      <rect x="8" y="0" width="1" height="1" />
+      <rect x="3" y="1" width="1" height="1" />
+      <rect x="7" y="1" width="1" height="1" />
+      <rect x="2" y="2" width="7" height="1" />
+      <rect x="1" y="3" width="2" height="1" />
+      <rect x="4" y="3" width="3" height="1" />
+      <rect x="8" y="3" width="2" height="1" />
+      <rect x="0" y="4" width="11" height="1" />
+      <rect x="0" y="5" width="1" height="1" />
+      <rect x="2" y="5" width="7" height="1" />
+      <rect x="10" y="5" width="1" height="1" />
+      <rect x="0" y="6" width="1" height="1" />
+      <rect x="2" y="6" width="1" height="1" />
+      <rect x="8" y="6" width="1" height="1" />
+      <rect x="10" y="6" width="1" height="1" />
+      <rect x="3" y="7" width="2" height="1" />
+      <rect x="6" y="7" width="2" height="1" />
+    </g>
+  </svg>
+);
 
-const CHARACTER_BY_STAGE: Record<string, CharacterConfig> = {
-  'LEVEL 01': { src: '/timeline/mario.png', alt: 'Mario at the starting level', className: 'object-contain' },
-  'LEVEL 02': { src: '/timeline/goomba.png', alt: 'Goomba at the briefing level', className: 'object-contain' },
-  'LEVEL 03': { src: '/timeline/waluigi-new-cutout.png', alt: 'Waluigi at the action level', className: 'object-contain' },
-  'LEVEL 04': { src: '/timeline/toad-new.png', alt: 'Toad at the checkpoint level', className: 'object-contain' },
-  'LEVEL 06': { src: '/timeline/daisy.png', alt: 'Princess Daisy at the Day 2 starting level', className: 'object-contain object-bottom' },
-  'LEVEL 07': { src: '/timeline/mario-party.webp', alt: 'Mario Party artwork at the code freeze level', className: 'object-contain object-bottom' },
-  'LEVEL 08': { src: '/timeline/bowser.png', alt: 'Bowser at the boss level', className: 'object-contain object-bottom', needsBlueKey: true },
-  'LEVEL 09': { src: '/timeline/peach.png', alt: 'Princess Peach at the final victory level', className: 'object-contain object-bottom' },
-};
+const PixelGhost = ({ color = '#FF007F', className = '' }: { color?: string, className?: string }) => (
+  <svg viewBox="0 0 14 14" className={`w-full h-full drop-shadow-[0_0_12px_${color}] ${className}`} style={{ shapeRendering: 'crispEdges' }}>
+    <g fill={color}>
+      <rect x="5" y="0" width="4" height="1" />
+      <rect x="3" y="1" width="8" height="1" />
+      <rect x="2" y="2" width="10" height="1" />
+      <rect x="1" y="3" width="12" height="4" />
+      <rect x="0" y="7" width="14" height="5" />
+      <rect x="0" y="12" width="2" height="2" />
+      <rect x="3" y="12" width="2" height="2" />
+      <rect x="6" y="12" width="2" height="2" />
+      <rect x="9" y="12" width="2" height="2" />
+      <rect x="12" y="12" width="2" height="2" />
+    </g>
+    <rect x="3" y="4" width="2" height="2" fill="#FFF" />
+    <rect x="9" y="4" width="2" height="2" fill="#FFF" />
+    <rect x="4" y="5" width="1" height="1" fill="#000" />
+    <rect x="10" y="5" width="1" height="1" fill="#000" />
+  </svg>
+);
 
-function BlueScreenCutout({ src, alt, className }: CharacterConfig) {
-  const [processedSrc, setProcessedSrc] = useState<string>();
+const PixelCoin = ({ className = '' }: { className?: string }) => (
+  <svg viewBox="0 0 10 10" className={`w-full h-full drop-shadow-[0_0_15px_rgba(255,215,0,0.9)] ${className}`} style={{ shapeRendering: 'crispEdges' }}>
+    <rect x="3" y="0" width="4" height="1" fill="#FFD700" />
+    <rect x="2" y="1" width="6" height="1" fill="#FFD700" />
+    <rect x="1" y="2" width="8" height="6" fill="#FFD700" />
+    <rect x="2" y="8" width="6" height="1" fill="#FFD700" />
+    <rect x="3" y="9" width="4" height="1" fill="#FFD700" />
+    <rect x="4" y="2" width="2" height="6" fill="#FFF" opacity="0.6" />
+  </svg>
+);
 
-  useEffect(() => {
-    let cancelled = false;
-    const image = new Image();
-    image.src = src;
-    image.onload = () => {
-      const canvas = document.createElement('canvas');
-      canvas.width = image.naturalWidth;
-      canvas.height = image.naturalHeight;
-      const context = canvas.getContext('2d', { willReadFrequently: true });
-      if (!context) return;
-
-      context.drawImage(image, 0, 0);
-      const pixels = context.getImageData(0, 0, canvas.width, canvas.height);
-      for (let i = 0; i < pixels.data.length; i += 4) {
-        const red = pixels.data[i];
-        const green = pixels.data[i + 1];
-        const blue = pixels.data[i + 2];
-        // Removes only the saturated royal-blue screen surrounding the supplied Bowser PNG.
-        if (blue > 160 && blue > red * 1.65 && blue > green * 1.65) pixels.data[i + 3] = 0;
-      }
-      context.putImageData(pixels, 0, 0);
-      if (!cancelled) setProcessedSrc(canvas.toDataURL('image/png'));
-    };
-    return () => { cancelled = true; };
-  }, [src]);
-
-  return <img src={processedSrc ?? src} alt={alt} className={`h-full w-full ${className}`} draggable={false} />;
-}
+const Pacman = ({ className = '' }: { className?: string }) => (
+  <svg viewBox="0 0 16 16" className={`w-full h-full drop-shadow-[0_0_15px_rgba(255,215,0,0.8)] ${className}`} style={{ shapeRendering: 'crispEdges' }}>
+    <g fill="#FFD700">
+      <rect x="5" y="1" width="6" height="1" />
+      <rect x="3" y="2" width="10" height="1" />
+      <rect x="2" y="3" width="12" height="2" />
+      <rect x="1" y="5" width="14" height="3" />
+      <rect x="1" y="8" width="7" height="3" />
+      <rect x="1" y="11" width="12" height="2" />
+      <rect x="2" y="13" width="10" height="1" />
+      <rect x="4" y="14" width="6" height="1" />
+    </g>
+    <rect x="9" y="3" width="2" height="2" fill="#000" />
+  </svg>
+);
 
 interface TimelineCharacterProps {
   stage: string;
@@ -57,22 +79,38 @@ interface TimelineCharacterProps {
 }
 
 export default function TimelineCharacter({ stage, className = '' }: TimelineCharacterProps) {
-  const character = CHARACTER_BY_STAGE[stage];
-  if (!character) return null;
+  let character = null;
+
+  switch (stage) {
+    case 'LEVEL 01':
+      character = <Pacman className="animate-bounce" />;
+      break;
+    case 'LEVEL 02':
+      character = <PixelGhost color="#FF007F" className="animate-pulse" />;
+      break;
+    case 'LEVEL 03':
+      character = <SpaceInvader color="#00F0FF" className="animate-bounce" />;
+      break;
+    case 'LEVEL 04':
+      character = <PixelGhost color="#FFD700" className="animate-pulse" />;
+      break;
+    case 'LEVEL 05':
+      character = <SpaceInvader color="#8A2BE2" className="animate-bounce" />;
+      break;
+    case 'LEVEL 06':
+      character = <PixelGhost color="#00FF00" className="animate-pulse" />;
+      break;
+    case 'LEVEL 07':
+      character = <PixelCoin className="animate-bounce" />;
+      break;
+    default:
+      return null;
+  }
 
   return (
     <div className={`select-none ${className}`}>
-      <div className={`relative h-28 w-28 sm:h-32 sm:w-32 ${stage === 'LEVEL 08' || stage === 'LEVEL 09' ? 'h-32 w-32 sm:h-36 sm:w-36' : ''}`}>
-        {character.needsBlueKey ? (
-          <BlueScreenCutout {...character} />
-        ) : (
-          <img
-            src={character.src}
-            alt={character.alt}
-            className={`h-full w-full ${character.className}`}
-            draggable={false}
-          />
-        )}
+      <div className={`relative h-20 w-20 sm:h-24 sm:w-24 flex items-center justify-center`}>
+        {character}
       </div>
     </div>
   );
