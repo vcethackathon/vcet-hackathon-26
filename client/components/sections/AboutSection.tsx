@@ -44,14 +44,15 @@ export default function AboutSection() {
             {/* Oversized House of Yellow-Style Bold Headline from temp */}
             <h2 className="font-pixel text-xl sm:text-3xl md:text-4xl text-white leading-tight mb-6">
               WELCOME TO <span className="text-[#FF007F]">ARCADE</span>.<br />
-              WHERE <span className="text-[#00F0FF] underline decoration-[#FFD700] underline-offset-8">PIXELS</span> TURN INTO <span className="text-[#FFD700]">REAL IMPACT</span>.
-            </h2>
+
+              WHERE < span className="text-[#00F0FF]" > PIXELS</span > TURN INTO < span className="text-[#FFD700]" > REAL IMPACT</span >.
+            </h2 >
 
             {/* Gradient Line Divider */}
-            <div className="h-1 w-32 bg-gradient-to-r from-[#FF007F] via-[#00F0FF] to-[#8A2BE2] mb-6" />
+            < div className="h-1 w-32 bg-gradient-to-r from-[#FF007F] via-[#00F0FF] to-[#8A2BE2] mb-6" />
 
             {/* Narrative Copy Paragraphs from temp */}
-            <div className="space-y-4 text-gray-300 text-sm sm:text-base leading-relaxed font-sans-custom">
+            < div className="space-y-4 text-gray-300 text-sm sm:text-base leading-relaxed font-sans-custom" >
               <p className="border-l-4 border-[#FF007F] pl-4 bg-[#12131C]/60 py-2">
                 <strong className="text-white">VCET Hackathon 2026 &quot;Arcade&quot;</strong> is not just another 30-hour coding marathon. It is an immersive battleground where developers, designers, and visionaries transform individual pixels of logic into high-impact digital solutions.
               </p>
@@ -63,10 +64,10 @@ export default function AboutSection() {
               <p className="text-gray-400">
                 Fuel your passion, collaborate with top talent across India, and present your creation before industry leaders to claim your share of the <strong className="text-[#FFD700]"><span className="rupee">₹</span>85,000 jackpot</strong>. Insert your coin, assemble your squad, and press start!
               </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+            </div >
+          </div >
+        </div >
+      </div >
+    </section >
   );
 }

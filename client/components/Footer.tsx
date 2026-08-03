@@ -4,6 +4,15 @@ import { UNSTOP_URL, SITE_CONFIG } from '@/config/site';
 import { Gamepad2, MapPin, Mail, Phone, ExternalLink } from 'lucide-react';
 import { playRegistrationSound, playHoverSound } from '@/utils/sound';
 
+const navigationLinks = [
+  { label: 'About', href: '#about' },
+  { label: 'Tracks', href: '#tracks' },
+  { label: 'Timeline', href: '#timeline' },
+  { label: 'Prizes', href: '#prizes' },
+  { label: 'Sponsors', href: '#sponsors' },
+  { label: 'FAQ', href: '#faq' },
+];
+
 export default function Footer() {
   return (
     <footer className="relative bg-[#07080A] border-t-4 border-[#8A2BE2] text-gray-400 pt-16 pb-12 overflow-hidden">
@@ -13,11 +22,11 @@ export default function Footer() {
 
           {/* Brand Column */}
           <div className="md:col-span-5 space-y-4">
-            <a href="#" className="inline-block group transition-transform duration-200 hover:scale-105" aria-label="VCET Hackathon 2026">
+            <a href="/" className="inline-block group transition-transform duration-200" aria-label="VCET Hackathon 2026">
               <img
                 src="/logo.png"
                 alt="VCET Hackathon 2026 Logo"
-                className="h-14 sm:h-16 w-auto object-contain drop-shadow-[0_0_10px_rgba(255,0,127,0.35)] group-hover:drop-shadow-[0_0_14px_rgba(0,240,255,0.7)] transition-all duration-300"
+                className="h-14 sm:h-16 w-auto object-contain scale-[1.7] md:scale-[2.2] origin-left drop-shadow-[0_0_10px_rgba(255,0,127,0.35)] group-hover:drop-shadow-[0_0_14px_rgba(0,240,255,0.7)] hover:scale-[1.8] md:hover:scale-[2.3] transition-all duration-300"
               />
             </a>
 
@@ -64,16 +73,19 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Nav Links */}
+          {/* Navigation column */}
           <div className="md:col-span-3 space-y-3">
             <h4 className="font-pixel text-xs text-[#00F0FF] tracking-wider uppercase mb-2">
               NAVIGATION
             </h4>
             <ul className="space-y-2 font-mono text-xs">
-              {SITE_CONFIG.navLinks.map((link) => (
-                <li key={link.name}>
-                  <a href={link.href} className="hover:text-[#FF007F] transition-colors">
-                    ▸ {link.name}
+              {navigationLinks.map((link) => (
+                <li key={link.label}>
+                  <a href={link.href} className="group flex items-center gap-2 py-1.5 text-gray-500 border-b border-white/[0.04] last:border-b-0 hover:text-[#FF007F] hover:pl-1.5 transition-all duration-200">
+                    <span className="text-[#FF007F] opacity-50 group-hover:opacity-100 transition-opacity duration-200" aria-hidden="true">
+                      ›
+                    </span>
+                    {link.label}
                   </a>
                 </li>
               ))}
@@ -98,9 +110,9 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-[#FFD700] shrink-0" />
-                <span>+91 76662 87344</span>
+                <span>+91 76662 87344 (Aditya Prajapati)</span>
                 <br />
-                <span>+91 91366 40778</span>
+                <span>+91 91366 40778 (Mihika Mhatre)</span>
               </div>
             </div>
 

@@ -1,6 +1,6 @@
 // Centralized site configuration for VCET Hackathon 2026 "Arcade"
 
-export const UNSTOP_URL = "https://unstop.com/p/vcet-hackathon-2026-vidyavardhinis-college-of-engineering-and-technology-1726213?lb=EyUiV71&utm_medium=Share&utm_source=online_coding_challenge&utm_campaign=Vcet_hackathon";
+export const UNSTOP_URL = "https://unstop.com";
 
 export const SITE_CONFIG = {
   name: "VCET Hackathon 2026",
@@ -28,7 +28,7 @@ export const SITE_CONFIG = {
     { label: "TOTAL PRIZE POOL", value: 100000, prefix: "₹", suffix: "", isCurrency: true },
     { label: "DAYS OF HACKING", value: 2, prefix: "", suffix: " DAYS" },
     { label: "HOURS OF CODE", value: 30, prefix: "", suffix: "+ HRS" },
-    { label: "EXPECTED HACKERS", value: 500, prefix: "", suffix: "+", isTodo: true },
+    { label: "EXPECTED PARTICIPANTS", value: 200, prefix: "", suffix: "+" },
   ],
   faqItems: [
     {

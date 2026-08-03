@@ -17,9 +17,9 @@ function WindowDots() {
 export default function StatsStrip() {
   return (
     <section className="relative py-16 bg-[#0B0C10] border-y-4 border-[#FF007F] shadow-[0_0_25px_rgba(255,0,127,0.3)] overflow-hidden">
-      
+
       {/* Background Subtle Retro Grid Pattern */}
-      <div 
+      <div
         className="absolute inset-0 opacity-10 pointer-events-none"
         style={{
           backgroundImage: `linear-gradient(to right, #00F0FF 1px, transparent 1px), linear-gradient(to bottom, #FF007F 1px, transparent 1px)`,
@@ -28,7 +28,7 @@ export default function StatsStrip() {
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         {/* Header Pill */}
         <div className="text-center mb-10">
           <span className="font-pixel text-xs text-[#FFD700] tracking-widest uppercase bg-black px-4 py-1.5 border border-[#FFD700] inline-block shadow-[3px_3px_0px_#FF007F]">
@@ -38,7 +38,7 @@ export default function StatsStrip() {
 
         {/* Main 2×2 Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          
+
           {/* ═══ Panel 1: ₹1,00,000 TOTAL PRIZE POOL ═══ */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -202,7 +202,7 @@ export default function StatsStrip() {
                 </div>
                 <div>
                   <div className="font-pixel text-4xl sm:text-5xl text-[#FFD700] leading-none mb-2 drop-shadow-[0_0_12px_rgba(255,215,0,0.5)]">
-                    500+
+                    200+
                   </div>
                   <div className="font-pixel text-xs text-[#00F0FF] tracking-[0.2em] uppercase">
                     EXPECTED HACKERS
