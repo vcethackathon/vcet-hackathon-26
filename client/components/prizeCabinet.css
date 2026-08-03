@@ -160,3 +160,16 @@
   .champion-card, .reward-card, .reward-action span { transition: none; }
   .mystery-block-viewer { display: none; }
 }
+
+/* ─── Extra-small screens (iPhone SE, Moto G, 375px and below) ─── */
+@media (max-width: 390px) {
+  .prize-stage { padding: 4rem .75rem 3.5rem; }
+  .reward-vault { padding: 1rem .75rem; }
+  .reward-vault > strong { font-size: clamp(1.9rem, 12vw, 2.6rem); }
+  .champion-card { padding: 1.2rem; }
+  .champion-copy > strong { font-size: 1.7rem; }
+  .champion-art { width: 7rem; height: 6.5rem; }
+  .reward-card { padding: .8rem; }
+  .reward-card-icon { width: 5.5rem; height: 5.5rem; }
+  .prize-footer { gap: .75rem; }
+}

@@ -10,16 +10,21 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    let rafId: number | null = null;
+
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      if (rafId !== null) return; // already scheduled — skip
+      rafId = requestAnimationFrame(() => {
+        setIsScrolled(window.scrollY > 50);
+        rafId = null;
+      });
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (rafId !== null) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   return (
@@ -35,7 +40,7 @@ export default function Navbar() {
           {/* Logo */}
           <a
             href="/"
-            className="flex items-center group shrink-0 transition-transform duration-200 hover:scale-105"
+            className="flex items-center group shrink-0 transition-transform duration-200 hover:scale-105 relative z-[70]"
             aria-label="VCET Hackathon 2026 Home"
           >
             <img

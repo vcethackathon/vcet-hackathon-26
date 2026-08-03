@@ -26,7 +26,7 @@ export default function ParallaxDecorations({
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none" aria-hidden="true">
       {/* ── BACKGROUND LAYER: Distant Cyber City Skyline ── */}
-      <div className="absolute bottom-0 left-0 right-0 h-48 opacity-[0.06] flex items-end justify-between px-6 transition-transform duration-300" style={{ transform: `translateY(${scrollProgress * -28}px)` }}>
+      <div className="absolute bottom-0 left-0 right-0 h-48 opacity-[0.06] flex items-end justify-between px-6" style={{ transform: `translate3d(0,${scrollProgress * -28}px,0)`, willChange: 'transform' }}>
         <div className="w-16 h-40 bg-[#00F0FF] rounded-t-sm" />
         <div className="w-24 h-32 bg-[#8A2BE2] rounded-t-sm" />
         <div className="w-20 h-44 bg-[#FF007F] rounded-t-sm" />
@@ -35,7 +35,7 @@ export default function ParallaxDecorations({
       </div>
 
       {/* ── MIDGROUND LAYER: Flying Cyber Drones & Tokens ── */}
-      <div className="absolute top-24 left-[5%] animate-drone-hover hidden lg:block transition-transform duration-300" style={{ transform: `translateY(${scrollProgress * 52}px)` }}>
+      <div className="absolute top-24 left-[5%] animate-drone-hover hidden lg:block" style={{ transform: `translate3d(0,${scrollProgress * 52}px,0)`, willChange: 'transform' }}>
         <div className="relative w-8 h-5 bg-[#12131C] border border-[#00F0FF] rounded-sm p-0.5 flex items-center justify-center shadow-[0_0_10px_rgba(0,240,255,0.4)]">
           <div className="w-2 h-2 bg-[#FF007F] rounded-full animate-ping" />
           {/* Rotor wings */}
@@ -44,7 +44,7 @@ export default function ParallaxDecorations({
         </div>
       </div>
 
-      <div className="absolute top-1/3 right-[4%] animate-drone-hover hidden lg:block transition-transform duration-300" style={{ transform: `translateY(${scrollProgress * -38}px)`, animationDelay: '1.5s' }}>
+      <div className="absolute top-1/3 right-[4%] animate-drone-hover hidden lg:block" style={{ transform: `translate3d(0,${scrollProgress * -38}px,0)`, animationDelay: '1.5s', willChange: 'transform' }}>
         <div className="relative w-7 h-4 bg-[#12131C] border border-[#FF007F] rounded-sm flex items-center justify-center shadow-[0_0_10px_rgba(255,0,127,0.4)]">
           <div className="w-1.5 h-1.5 bg-[#00F0FF] rounded-full" />
         </div>
