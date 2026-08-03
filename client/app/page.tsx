@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { playRegistrationSound, playHoverSound } from "@/utils/sound";
 
+import Preloader from "@/components/Preloader";
 import CRTOverlay from "@/components/CRTOverlay";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/sections/HeroSection";
@@ -17,15 +18,19 @@ import FaqSection from "@/components/FaqSection";
 import Footer from "@/components/Footer";
 
 // Fixed 3D background space canvas — lazy-loaded, no SSR
+// Only loaded AFTER preloader completes to prevent lag during video playback
 const ArcadeSpaceCanvas = dynamic(
   () => import("@/components/ArcadeSpaceCanvas"),
   { ssr: false }
 );
 
 export default function Page() {
+  const [preloaderDone, setPreloaderDone] = useState(false);
   const [coinState, setCoinState] = useState<"idle" | "ready">("idle");
 
   useEffect(() => {
+    if (!preloaderDone) return;
+
     let lastHovered: Element | null = null;
 
     const isRegistrationElement = (el: Element | null): boolean => {
@@ -77,7 +82,7 @@ export default function Page() {
       window.removeEventListener("mouseover", handleGlobalMouseOver, { capture: true });
       window.removeEventListener("mouseout", handleGlobalMouseOut, { capture: true });
     };
-  }, []);
+  }, [preloaderDone]);
 
   const handleInsertCoin = () => {
     setCoinState("ready");
@@ -85,42 +90,52 @@ export default function Page() {
   };
 
   return (
-    <main className="relative min-h-screen bg-[#0B0C10] text-[#F3F4F6] overflow-hidden selection:bg-[#FF007F] selection:text-white">
-      {/* 3D background space canvas */}
-      <ArcadeSpaceCanvas />
+    <>
+      {/* Preloader — sits above everything, defers main content until complete */}
+      {!preloaderDone && (
+        <Preloader onComplete={() => setPreloaderDone(true)} />
+      )}
 
-      {/* Retro CRT Scanlines & Vignette Overlay */}
-      <CRTOverlay />
+      {/* Main site — only rendered after preloader is done to prevent lag */}
+      {preloaderDone && (
+        <main className="relative min-h-screen bg-[#0B0C10] text-[#F3F4F6] overflow-hidden selection:bg-[#FF007F] selection:text-white">
+          {/* 3D background space canvas — mounted only after preloader */}
+          <ArcadeSpaceCanvas />
 
-      {/* Sticky Navigation Bar */}
-      <Navbar />
+          {/* Retro CRT Scanlines & Vignette Overlay */}
+          <CRTOverlay />
 
-      {/* 1. 3D Arcade Cabinet Hero Section */}
-      <HeroSection coinState={coinState} onInsertCoin={handleInsertCoin} />
+          {/* Sticky Navigation Bar */}
+          <Navbar />
 
-      {/* 2. 3D Pac-Man About Section */}
-      <AboutSection />
+          {/* 1. 3D Arcade Cabinet Hero Section */}
+          <HeroSection coinState={coinState} onInsertCoin={handleInsertCoin} />
 
-      {/* 3. Scoreboard Stats Strip */}
-      <StatsStrip />
+          {/* 2. 3D Pac-Man About Section */}
+          <AboutSection />
 
-      {/* 4. Tracks Section */}
-      <TracksSection />
+          {/* 3. Scoreboard Stats Strip */}
+          <StatsStrip />
 
-      {/* 5. Timeline / Level Progression */}
-      <TimelineSection />
+          {/* 4. Tracks Section */}
+          <TracksSection />
 
-      {/* 6. Prizes Section */}
-      <PrizesSection />
+          {/* 5. Timeline / Level Progression */}
+          <TimelineSection />
 
-      {/* 7. Sponsors Marquee */}
-      <SponsorsMarquee />
+          {/* 6. Prizes Section */}
+          <PrizesSection />
 
-      {/* 8. FAQ Section */}
-      <FaqSection />
+          {/* 7. Sponsors Marquee */}
+          <SponsorsMarquee />
 
-      {/* 9. Footer */}
-      <Footer />
-    </main>
+          {/* 8. FAQ Section */}
+          <FaqSection />
+
+          {/* 9. Footer */}
+          <Footer />
+        </main>
+      )}
+    </>
   );
 }

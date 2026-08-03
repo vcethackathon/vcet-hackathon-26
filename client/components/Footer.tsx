@@ -22,7 +22,7 @@ export default function Footer() {
 
           {/* Brand Column */}
           <div className="md:col-span-5 space-y-4">
-            <a href="/" className="inline-block group transition-transform duration-200" aria-label="VCET Hackathon 2026">
+            <a href="/" className="inline-block group transition-transform duration-200 relative z-[60]" aria-label="VCET Hackathon 2026">
               <img
                 src="/logo.png"
                 alt="VCET Hackathon 2026 Logo"

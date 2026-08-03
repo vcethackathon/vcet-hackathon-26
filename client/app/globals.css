@@ -97,11 +97,18 @@
   border-radius: 0 0 2px 2px;
 }
 
+/* ── GLOBAL PERFORMANCE: smooth scrolling + GPU rendering hints ── */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--midnight-black);
   color: #F3F4F6;
   font-family: var(--font-sans);
   overflow-x: hidden;
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
   selection-background-color: var(--hot-magenta);
   selection-color: #000000;
 }
@@ -188,6 +195,10 @@ body {
       rgba(0, 0, 255, 0.03));
   background-size: 100% 4px, 6px 100%;
   z-index: 15;
+  /* GPU-composited: prevents this static overlay re-painting on every scroll tick */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* Glowing Accent Shadows */
@@ -232,6 +243,7 @@ body {
 
 .animate-glitch {
   animation: textGlitch 3s infinite alternate ease-in-out;
+  will-change: text-shadow;
 }
 
 /* Keyframe Blinking for Press Start prompt */
@@ -250,6 +262,7 @@ body {
 
 .animate-blink {
   animation: blinkPrompt 1.2s infinite;
+  will-change: opacity;
 }
 
 /* Marquee Infinite Keyframe */
@@ -267,6 +280,7 @@ body {
   display: flex;
   width: max-content;
   animation: marquee 25s linear infinite;
+  will-change: transform;
 }
 
 .animate-marquee:hover {
@@ -770,3 +784,28 @@ body {
   position: relative;
   top: -0.05em;
 }
+
+/* ─── SCROLL PERFORMANCE: Paint containment for page sections ─────────────
+   Each section is isolated — animations/repaints within one section
+   cannot trigger layout recalculations in other sections.            ──────*/
+section {
+  contain: layout style paint;
+}
+
+/* Drone & coin CSS animations — allocate GPU layer before animation starts */
+.animate-drone-hover {
+  will-change: transform;
+}
+
+.animate-coin-spin {
+  will-change: transform;
+}
+
+/* Fixed overlays (navbar, progress rail, canvas wrapper) — own compositor layer */
+header[class*="fixed"],
+nav[class*="fixed"],
+div[style*="position: fixed"] {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}

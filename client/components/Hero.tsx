@@ -42,7 +42,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16">
+    <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-16 sm:pt-20 md:pt-24 pb-16">
       {/* Background Video (full brightness & clarity) */}
       <video
         autoPlay
