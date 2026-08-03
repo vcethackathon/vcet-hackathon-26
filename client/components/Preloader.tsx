@@ -1,22 +1,42 @@
 'use client';
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface PreloaderProps {
   onComplete: () => void;
+  onExitStart?: () => void;
 }
 
-export default function Preloader({ onComplete }: PreloaderProps) {
+export default function Preloader({ onComplete, onExitStart }: PreloaderProps) {
   const [phase, setPhase] = useState<'playing' | 'exiting'>('playing');
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const handleEnd = useCallback(() => {
     setPhase('exiting');
+    onExitStart?.();
     setTimeout(() => {
       onComplete();
     }, 800);
-  }, [onComplete]);
+  }, [onComplete, onExitStart]);
+
+  useEffect(() => {
+    if (!videoRef.current) return;
+
+    const playVideo = async () => {
+      try {
+        // Attempt to play with sound first
+        videoRef.current!.muted = false;
+        await videoRef.current!.play();
+      } catch (err) {
+        // If the browser blocks unmuted autoplay, fallback to muted so the site doesn't break
+        videoRef.current!.muted = true;
+        videoRef.current!.play().catch(() => { });
+      }
+    };
+
+    playVideo();
+  }, []);
 
   return (
     <AnimatePresence>
@@ -28,11 +48,9 @@ export default function Preloader({ onComplete }: PreloaderProps) {
           transition={{ duration: 0.8, ease: 'easeInOut' }}
           className="fixed inset-0 z-[200] bg-black overflow-hidden"
         >
-          {/* Video — auto-plays immediately upon load */}
+          {/* Video — attempts unmuted autoplay first */}
           <video
             ref={videoRef}
-            muted
-            autoPlay
             playsInline
             preload="auto"
             onEnded={handleEnd}
@@ -40,6 +58,8 @@ export default function Preloader({ onComplete }: PreloaderProps) {
           >
             <source src="/preloader_v2.mp4" type="video/mp4" />
           </video>
+
+
 
           {/* Skip button during video playback */}
           <AnimatePresence>

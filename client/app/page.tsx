@@ -25,11 +25,11 @@ const ArcadeSpaceCanvas = dynamic(
 );
 
 export default function Page() {
-  const [preloaderDone, setPreloaderDone] = useState(false);
+  const [preloaderPhase, setPreloaderPhase] = useState<'active' | 'exiting' | 'done'>('active');
   const [coinState, setCoinState] = useState<"idle" | "ready">("idle");
 
   useEffect(() => {
-    if (!preloaderDone) return;
+    if (preloaderPhase !== 'done') return;
 
     let lastHovered: Element | null = null;
 
@@ -82,7 +82,7 @@ export default function Page() {
       window.removeEventListener("mouseover", handleGlobalMouseOver, { capture: true });
       window.removeEventListener("mouseout", handleGlobalMouseOut, { capture: true });
     };
-  }, [preloaderDone]);
+  }, [preloaderPhase]);
 
   const handleInsertCoin = () => {
     setCoinState("ready");
@@ -91,13 +91,16 @@ export default function Page() {
 
   return (
     <>
-      {/* Preloader — sits above everything, defers main content until complete */}
-      {!preloaderDone && (
-        <Preloader onComplete={() => setPreloaderDone(true)} />
+      {/* Preloader — sits above everything, fades out over 800ms when video ends */}
+      {preloaderPhase !== 'done' && (
+        <Preloader 
+          onExitStart={() => setPreloaderPhase('exiting')}
+          onComplete={() => setPreloaderPhase('done')} 
+        />
       )}
 
-      {/* Main site — only rendered after preloader is done to prevent lag */}
-      {preloaderDone && (
+      {/* Main site — mounted during preloader exit to hide expensive render/lag behind the fade-out */}
+      {(preloaderPhase === 'exiting' || preloaderPhase === 'done') && (
         <main className="relative min-h-screen bg-[#0B0C10] text-[#F3F4F6] overflow-hidden selection:bg-[#FF007F] selection:text-white">
           {/* 3D background space canvas — mounted only after preloader */}
           <ArcadeSpaceCanvas />
