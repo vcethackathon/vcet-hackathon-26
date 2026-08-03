@@ -60,7 +60,6 @@ export default function Preloader({ onComplete, onExitStart }: PreloaderProps) {
           </video>
 
 
-
           {/* Skip button during video playback */}
           <AnimatePresence>
             {phase === 'playing' && (
