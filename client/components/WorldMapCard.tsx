@@ -124,10 +124,10 @@ const WorldMapCard = forwardRef<HTMLDivElement, WorldMapCardProps>(
             : '4px 4px 0px #000',
         }}
       >
-        {/* Connector line from card to route */}
+        {/* Connector line from card to route — hidden on mobile to prevent horizontal overflow */}
         <div
           className={`
-            absolute top-1/2 -translate-y-1/2
+            hidden md:block absolute top-1/2 -translate-y-1/2
             ${side === 'left' ? '-right-6 sm:-right-8' : '-left-6 sm:-left-8'}
             w-6 sm:w-8 h-[3px]
           `}
@@ -137,10 +137,10 @@ const WorldMapCard = forwardRef<HTMLDivElement, WorldMapCardProps>(
           aria-hidden="true"
         />
 
-        {/* Connector dot */}
+        {/* Connector dot — hidden on mobile to prevent horizontal overflow */}
         <div
           className={`
-            absolute top-1/2 -translate-y-1/2
+            hidden md:block absolute top-1/2 -translate-y-1/2
             ${side === 'left' ? '-right-8 sm:-right-10' : '-left-8 sm:-left-10'}
             w-3 h-3 rounded-sm rotate-45
           `}

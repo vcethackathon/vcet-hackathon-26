@@ -115,7 +115,13 @@ export default function TimelineCheckpoint({
     <div className="relative group/cp">
       {/* Supplied game characters give every level a distinct arcade landmark. */}
       <div
-        className={`hidden xl:block absolute top-1/2 -translate-y-1/2 z-30 pointer-events-none ${side === 'left' ? '-right-24' : '-left-24'}`}
+        className={`absolute top-1/2 -translate-y-1/2 z-30 pointer-events-none 
+          ${side === 'left' 
+            ? '-right-16 md:-right-20 xl:-right-24' 
+            : '-left-12 md:-left-16 xl:-left-24'
+          }
+          scale-[0.6] md:scale-[0.8] xl:scale-100
+        `}
         aria-hidden="true"
       >
         <TimelineCharacter stage={event.stage} />

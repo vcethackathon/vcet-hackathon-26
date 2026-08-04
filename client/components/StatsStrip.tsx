@@ -63,9 +63,9 @@ export default function StatsStrip() {
             <div className="flex-1 flex items-center justify-center">
               <div className="text-center">
                 <div className="flex items-center justify-center gap-3 mb-3">
-                  <span className="text-3xl">💰</span>
-                  <div className="font-pixel text-4xl sm:text-5xl text-[#FFD700] tracking-tight drop-shadow-[0_0_12px_rgba(255,215,0,0.5)]">
-                    <span className="rupee">₹</span>85,000
+                  <span className="text-3xl">💸</span>
+                  <div className="font-pixel text-3xl sm:text-4xl md:text-5xl text-[#FFD700] tracking-tight drop-shadow-[0_0_12px_rgba(255,215,0,0.5)]">
+                    <span className="rupee">₹</span>85000
                   </div>
                 </div>
                 <div className="font-pixel text-xs text-[#00F0FF] tracking-[0.2em] uppercase">
@@ -99,7 +99,7 @@ export default function StatsStrip() {
             <div className="flex-1 flex items-center justify-center gap-6">
               {/* Stat */}
               <div className="text-center">
-                <div className="font-pixel text-4xl sm:text-5xl text-[#FFD700] leading-none mb-2 drop-shadow-[0_0_12px_rgba(255,215,0,0.5)]">
+                <div className="font-pixel text-3xl sm:text-4xl md:text-5xl text-[#FFD700] leading-none mb-2 drop-shadow-[0_0_12px_rgba(255,215,0,0.5)]">
                   2 DAYS
                 </div>
                 <div className="font-pixel text-xs text-[#00F0FF] tracking-[0.2em] uppercase">
@@ -163,7 +163,7 @@ export default function StatsStrip() {
                   <Zap className="w-6 h-6 text-[#FFD700]" />
                 </div>
                 <div>
-                  <div className="font-pixel text-4xl sm:text-5xl text-[#FFD700] leading-none mb-2 drop-shadow-[0_0_12px_rgba(255,215,0,0.5)]">
+                  <div className="font-pixel text-3xl sm:text-4xl md:text-5xl text-[#FFD700] leading-none mb-2 drop-shadow-[0_0_12px_rgba(255,215,0,0.5)]">
                     30 HRS
                   </div>
                   <div className="font-pixel text-xs text-[#00F0FF] tracking-[0.2em] uppercase">
@@ -201,7 +201,7 @@ export default function StatsStrip() {
                   <Users className="w-6 h-6 text-[#FF007F]" />
                 </div>
                 <div>
-                  <div className="font-pixel text-4xl sm:text-5xl text-[#FFD700] leading-none mb-2 drop-shadow-[0_0_12px_rgba(255,215,0,0.5)]">
+                  <div className="font-pixel text-3xl sm:text-4xl md:text-5xl text-[#FFD700] leading-none mb-2 drop-shadow-[0_0_12px_rgba(255,215,0,0.5)]">
                     200+
                   </div>
                   <div className="font-pixel text-xs text-[#00F0FF] tracking-[0.2em] uppercase">

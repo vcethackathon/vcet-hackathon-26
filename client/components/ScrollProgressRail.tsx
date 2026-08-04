@@ -47,8 +47,13 @@ export default function ScrollProgressRail({
 
         {/* ── MINI SLIDING MASCOT ICON ON RAIL ── */}
         <div
-          className="absolute -left-[14px] transition-all duration-500 ease-out pointer-events-none z-30"
-          style={{ top: `calc(${progressPercentage}% - 14px)` }}
+          className="absolute -left-[14px] pointer-events-none z-30"
+          style={{
+            top: 0,
+            transform: `translateY(calc(${progressPercentage}% - 14px))`,
+            transition: 'transform 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+            willChange: 'transform',
+          }}
           aria-hidden="true"
         >
           <div className="p-0.5 bg-[#0B0C10] border border-[#00F0FF] rounded-sm shadow-[0_0_6px_rgba(0,240,255,0.8)]">

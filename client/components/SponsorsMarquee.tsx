@@ -33,8 +33,8 @@ export default function SponsorsMarquee() {
       <div className="relative w-full overflow-hidden bg-[#12131C] py-8 border-y border-gray-800">
         
         {/* Fade gradient edges */}
-        <div className="absolute top-0 bottom-0 left-0 w-24 bg-gradient-to-r from-[#0B0C10] to-transparent z-10 pointer-events-none" />
-        <div className="absolute top-0 bottom-0 right-0 w-24 bg-gradient-to-l from-[#0B0C10] to-transparent z-10 pointer-events-none" />
+        <div className="absolute top-0 bottom-0 left-0 w-10 sm:w-24 bg-gradient-to-r from-[#0B0C10] to-transparent z-10 pointer-events-none" />
+        <div className="absolute top-0 bottom-0 right-0 w-10 sm:w-24 bg-gradient-to-l from-[#0B0C10] to-transparent z-10 pointer-events-none" />
 
         <div className="animate-marquee flex items-center gap-8 sm:gap-12">
           {marqueeItems.map((item, idx) => (
