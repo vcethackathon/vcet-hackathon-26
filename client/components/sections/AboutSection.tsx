@@ -7,7 +7,7 @@ const HorrorPacmanModel = dynamic(
   { ssr: false }
 );
 
-export default function AboutSection() {
+export default function AboutSection({ show3D = true }: { show3D?: boolean }) {
   return (
     <section id="about" className="section relative py-20 bg-[#0B0C10] border-t-2 border-[#8A2BE2]/40 overflow-hidden">
       {/* Background Retro Grid Pattern */}
@@ -24,7 +24,7 @@ export default function AboutSection() {
           {/* 3D Model Visual (Left Side) */}
           <div className="about-visual border border-[#00F0FF]/20 bg-[#0D0E16]/80 rounded-lg overflow-hidden shadow-[0_0_30px_rgba(0,240,255,0.15)]">
             <div className="about-visual-inner">
-              <HorrorPacmanModel />
+              {show3D && <HorrorPacmanModel />}
               <div className="about-model-caption font-pixel text-xs text-[#00F0FF] tracking-widest uppercase">
                 30H HACK
               </div>

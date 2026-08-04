@@ -10,6 +10,7 @@ interface PreloaderProps {
 
 export default function Preloader({ onComplete, onExitStart }: PreloaderProps) {
   const [phase, setPhase] = useState<'playing' | 'exiting'>('playing');
+  const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const handleEnd = useCallback(() => {
@@ -28,10 +29,12 @@ export default function Preloader({ onComplete, onExitStart }: PreloaderProps) {
         // Attempt to play with sound first
         videoRef.current!.muted = false;
         await videoRef.current!.play();
+        setIsMuted(false);
       } catch (err) {
         // If the browser blocks unmuted autoplay, fallback to muted so the site doesn't break
         videoRef.current!.muted = true;
-        videoRef.current!.play().catch(() => { });
+        await videoRef.current!.play().catch(() => { });
+        setIsMuted(true);
       }
     };
 
@@ -58,6 +61,22 @@ export default function Preloader({ onComplete, onExitStart }: PreloaderProps) {
           >
             <source src="/preloader_v2.mp4" type="video/mp4" />
           </video>
+
+          {/* Sound control button */}
+          {phase === 'playing' && (
+            <button
+              onClick={() => {
+                if (videoRef.current) {
+                  const nextMuted = !videoRef.current.muted;
+                  videoRef.current.muted = nextMuted;
+                  setIsMuted(nextMuted);
+                }
+              }}
+              className="absolute top-5 right-5 z-20 font-pixel text-[10px] sm:text-xs text-white/60 hover:text-white uppercase tracking-widest border border-white/20 hover:border-[#00F0FF]/60 px-4 py-2.5 transition-all duration-200 bg-black/40 backdrop-blur-sm hover:shadow-[0_0_15px_rgba(0,240,255,0.2)] rounded-none"
+            >
+              {isMuted ? '🔇 UNMUTE' : '🔊 MUTE'}
+            </button>
+          )}
 
 
           {/* Skip button during video playback */}

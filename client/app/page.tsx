@@ -99,46 +99,48 @@ export default function Page() {
         />
       )}
 
-      {/* Main site — mounted during preloader exit to hide expensive render/lag behind the fade-out */}
-      {(preloaderPhase === 'exiting' || preloaderPhase === 'done') && (
-        <main className="relative min-h-screen bg-[#0B0C10] text-[#F3F4F6] overflow-hidden selection:bg-[#FF007F] selection:text-white">
-          {/* 3D background space canvas — mounted only after preloader */}
-          <ArcadeSpaceCanvas />
+      {/* Main site — mounted always so 3D models and canvases load/render in the background during preloader */}
+      <main 
+        className={`relative min-h-screen bg-[#0B0C10] text-[#F3F4F6] selection:bg-[#FF007F] selection:text-white ${
+          preloaderPhase !== 'done' ? 'h-screen overflow-hidden pointer-events-none select-none' : 'overflow-hidden'
+        }`}
+      >
+        {/* 3D background space canvas — mounted only after preloader */}
+        <ArcadeSpaceCanvas />
 
-          {/* Retro CRT Scanlines & Vignette Overlay */}
-          <CRTOverlay />
+        {/* Retro CRT Scanlines & Vignette Overlay */}
+        <CRTOverlay />
 
-          {/* Sticky Navigation Bar */}
-          <Navbar />
+        {/* Sticky Navigation Bar */}
+        <Navbar />
 
-          {/* 1. 3D Arcade Cabinet Hero Section */}
-          <HeroSection coinState={coinState} onInsertCoin={handleInsertCoin} />
+        {/* 1. 3D Arcade Cabinet Hero Section */}
+        <HeroSection coinState={coinState} onInsertCoin={handleInsertCoin} />
 
-          {/* 2. 3D Pac-Man About Section */}
-          <AboutSection />
+        {/* 2. 3D Pac-Man About Section */}
+        <AboutSection />
 
-          {/* 3. Scoreboard Stats Strip */}
-          <StatsStrip />
+        {/* 3. Scoreboard Stats Strip */}
+        <StatsStrip />
 
-          {/* 4. Tracks Section */}
-          <TracksSection />
+        {/* 4. Tracks Section */}
+        <TracksSection />
 
-          {/* 5. Timeline / Level Progression */}
-          <TimelineSection />
+        {/* 5. Timeline / Level Progression */}
+        <TimelineSection />
 
-          {/* 6. Prizes Section */}
-          <PrizesSection />
+        {/* 6. Prizes Section */}
+        <PrizesSection />
 
-          {/* 7. Sponsors Marquee */}
-          <SponsorsMarquee />
+        {/* 7. Sponsors Marquee */}
+        <SponsorsMarquee />
 
-          {/* 8. FAQ Section */}
-          <FaqSection />
+        {/* 8. FAQ Section */}
+        <FaqSection />
 
-          {/* 9. Footer */}
-          <Footer />
-        </main>
-      )}
+        {/* 9. Footer */}
+        <Footer />
+      </main>
     </>
   );
 }
