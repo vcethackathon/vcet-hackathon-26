@@ -92,9 +92,10 @@
 .reward-card::after { position: absolute; right: -3rem; bottom: -4rem; width: 9rem; height: 9rem; content: ''; border-radius: 50%; background: var(--glow); opacity: .1; filter: blur(24px); }
 .reward-card:hover, .reward-card.is-expanded { transform: translateY(-5px); border-color: var(--accent); box-shadow: inset 0 1px rgba(255,255,255,.06), 0 15px 30px rgba(0,0,0,.27), 0 0 18px color-mix(in srgb, var(--accent) 14%, transparent); }
 .second-place-card { min-height: 21.5rem; border-color: rgba(216, 225, 240, .82); background: linear-gradient(135deg, rgba(239, 244, 252, .98), rgba(147, 159, 180, .92) 47%, rgba(239, 244, 252, .98)); box-shadow: inset 0 1px rgba(255,255,255,.78), 0 12px 26px rgba(0,0,0,.22); }
-.second-place-card .reward-card-top, .second-place-card .reward-label, .second-place-card > strong { color: #202837; }
-.second-place-card .reward-card-top span:last-child { color: #536174; }
+.second-place-card .reward-card-top, .second-place-card .reward-label, .second-place-card > strong { color: #0f1a2b; }
+.second-place-card .reward-card-top span:last-child { color: #1e3a5f; }
 .second-place-card .reward-card-icon { border-color: rgba(48, 62, 82, .48); background: rgba(255,255,255,.38); }
+.second-place-card .reward-detail { color: #1a2d45; }
 .second-place-card::after { opacity: .16; }
 .reward-card-top { display: flex; justify-content: space-between; color: var(--accent); font: .58rem var(--font-pixel, monospace); letter-spacing: .06em; }
 .reward-card-top span:last-child { color: #8f9db1; font-size: .5rem; }

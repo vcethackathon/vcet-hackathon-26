@@ -103,7 +103,7 @@ export default function Footer() {
             <div className="space-y-2.5 font-mono text-xs">
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-[#FF007F] shrink-0 mt-0.5" />
-                <span>VCET Campus, Kaman Road, Vasai, Maharashtra, India</span>
+                <span>VCET Campus,K.T. marg, Vasai road(W),Palghar -401202, Maharashtra </span>
               </div>
               <div className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-[#00F0FF] shrink-0" />
