@@ -49,6 +49,7 @@ export default function Hero() {
         loop
         muted
         playsInline
+        disablePictureInPicture
         className="absolute inset-0 w-full h-full object-cover z-0 scale-105"
         poster="/next.svg"
       >

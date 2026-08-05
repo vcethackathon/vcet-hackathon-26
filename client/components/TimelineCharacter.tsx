@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 
 type CharacterConfig = {
   src: string;
@@ -29,11 +30,13 @@ export default function TimelineCharacter({ stage, className = '' }: TimelineCha
   return (
     <div className={`select-none ${className}`}>
       <div className={`relative h-24 w-24 sm:h-28 sm:w-28 flex items-center justify-center`}>
-        <img
+        <Image
           src={character.src}
           alt={character.alt}
           className={`h-full w-full ${character.className}`}
           draggable={false}
+          width={112}
+          height={112}
         />
       </div>
     </div>

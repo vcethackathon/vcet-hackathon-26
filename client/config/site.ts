@@ -1,6 +1,6 @@
 // Centralized site configuration for VCET Hackathon 2026 "Arcade"
 
-export const UNSTOP_URL = "https://unstop.com";
+export const UNSTOP_URL = "https://unstop.com/o/Pscxj9I?utm_medium=Share&utm_source=vcet_hackathon&utm_campaign=Online_coding_challenge";
 
 export const SITE_CONFIG = {
   name: "VCET Hackathon 2026",

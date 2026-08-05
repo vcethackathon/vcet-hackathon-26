@@ -3,9 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-
-const MODEL_URL = '/models/horror_pac-man.glb';
+import { preloadHorrorPacmanModel } from '@/utils/modelPreloader';
 
 // The GLB's flat ground plane read as a stray square in the card, so it is culled.
 const HIDDEN_NODES = /Floor1/i;
@@ -61,19 +59,20 @@ function Model({
 
   useEffect(() => {
     let cancelled = false;
-    let loaded: THREE.Group | null = null;
 
-    new GLTFLoader().load(
-      MODEL_URL,
-      (gltf) => {
+    preloadHorrorPacmanModel((pct) => {
+      if (!cancelled) onProgress(pct);
+    })
+      .then((gltf) => {
         if (cancelled) return;
-        loaded = gltf.scene;
 
-        gltf.scene.traverse((obj) => {
+        // Clone scene so model instance is clean
+        const gltfScene = gltf.scene.clone(true);
+
+        gltfScene.traverse((obj) => {
           if (shouldHide(obj)) obj.visible = false;
           if (isBackdrop(obj)) {
             obj.userData.isBackdrop = true;
-            // Always draw the dome first so it never occludes the characters
             (obj as THREE.Mesh).renderOrder = -1;
             obj.frustumCulled = false;
           }
@@ -81,7 +80,7 @@ function Model({
 
         // Play the clip authored inside the GLB ("Take 001")
         if (gltf.animations.length) {
-          const mixer = new THREE.AnimationMixer(gltf.scene);
+          const mixer = new THREE.AnimationMixer(gltfScene);
           gltf.animations.forEach((clip) => {
             const action = mixer.clipAction(clip);
             action.setLoop(THREE.LoopRepeat, Infinity);
@@ -90,28 +89,17 @@ function Model({
           mixerRef.current = mixer;
         }
 
-        setScene(gltf.scene);
+        setScene(gltfScene);
         onReady();
-      },
-      (event) => {
-        if (event.total > 0) {
-          onProgress(Math.min(100, Math.round((event.loaded / event.total) * 100)));
-        }
-      },
-      () => onProgress(-1),
-    );
+      })
+      .catch(() => {
+        if (!cancelled) onProgress(-1);
+      });
 
     return () => {
       cancelled = true;
       mixerRef.current?.stopAllAction();
       mixerRef.current = null;
-      loaded?.traverse((obj) => {
-        const mesh = obj as THREE.Mesh;
-        if (!mesh.isMesh) return;
-        mesh.geometry?.dispose();
-        const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
-        mats.forEach((m) => m?.dispose());
-      });
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -134,9 +122,6 @@ function Model({
     mixerRef.current?.update(delta);
     if (!groupRef.current || !spin.current) return;
 
-    // Drag momentum bleeds off; the idle motion is a gentle sway rather than a
-    // full spin, so the diorama keeps facing the viewer instead of turning its
-    // back and clipping against the frame.
     spin.current.angle += spin.current.velocity * delta;
     spin.current.velocity *= 1 - Math.min(1, delta * 3);
 
@@ -153,7 +138,7 @@ function Model({
   );
 }
 
-// ─── CANVAS SHELL (lazy-mounts, drag to spin) ──────────────────────────────
+// ─── CANVAS SHELL ─────────────────────────────────────────────────────────
 export default function HorrorPacmanModel() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const spin = useRef({ velocity: 0, angle: 0 });
@@ -163,10 +148,13 @@ export default function HorrorPacmanModel() {
   const [progress, setProgress] = useState(0);
   const [ready, setReady] = useState(false);
 
-  // The GLB is ~27 MB — only start fetching when the section approaches
+  // Mount canvas immediately when approaching or on site load
   useEffect(() => {
     const el = wrapRef.current;
-    if (!el) return;
+    if (!el) {
+      setInView(true);
+      return;
+    }
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -174,9 +162,10 @@ export default function HorrorPacmanModel() {
           observer.disconnect();
         }
       },
-      { rootMargin: '400px 0px' },
+      { rootMargin: '800px 0px' },
     );
     observer.observe(el);
+    setInView(true); // Pre-trigger so canvas initializes concurrently
     return () => observer.disconnect();
   }, []);
 
@@ -229,3 +218,4 @@ export default function HorrorPacmanModel() {
     </div>
   );
 }
+

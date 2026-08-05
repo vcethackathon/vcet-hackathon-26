@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { playRegistrationSound, playHoverSound } from "@/utils/sound";
+import { preloadAll3DAssets } from "@/utils/modelPreloader";
 
 import Preloader from "@/components/Preloader";
 import CRTOverlay from "@/components/CRTOverlay";
@@ -18,7 +19,6 @@ import FaqSection from "@/components/FaqSection";
 import Footer from "@/components/Footer";
 
 // Fixed 3D background space canvas — lazy-loaded, no SSR
-// Only loaded AFTER preloader completes to prevent lag during video playback
 const ArcadeSpaceCanvas = dynamic(
   () => import("@/components/ArcadeSpaceCanvas"),
   { ssr: false }
@@ -27,6 +27,11 @@ const ArcadeSpaceCanvas = dynamic(
 export default function Page() {
   const [preloaderPhase, setPreloaderPhase] = useState<'active' | 'exiting' | 'done'>('active');
   const [coinState, setCoinState] = useState<"idle" | "ready">("idle");
+
+  useEffect(() => {
+    // Start preloading 3D assets immediately on website opening
+    preloadAll3DAssets();
+  }, []);
 
   useEffect(() => {
     if (preloaderPhase !== 'done') return;

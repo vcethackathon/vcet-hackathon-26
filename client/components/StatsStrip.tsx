@@ -103,7 +103,7 @@ export default function StatsStrip() {
                   2 DAYS
                 </div>
                 <div className="font-pixel text-xs text-[#00F0FF] tracking-[0.2em] uppercase">
-                  DAYS OF HACKING
+                  DAYS OF CODING
                 </div>
               </div>
 
@@ -205,7 +205,7 @@ export default function StatsStrip() {
                     200+
                   </div>
                   <div className="font-pixel text-xs text-[#00F0FF] tracking-[0.2em] uppercase">
-                    EXPECTED HACKERS
+                    EXPECTED CODERS
                   </div>
 
                 </div>

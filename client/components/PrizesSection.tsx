@@ -3,6 +3,7 @@
 import { useState, type CSSProperties } from 'react';
 import { motion } from 'framer-motion';
 import { Coins, Crown, ExternalLink, Medal, Star, Trophy } from 'lucide-react';
+import Image from 'next/image';
 import { UNSTOP_URL } from '@/config/site';
 import { playRegistrationSound, playHoverSound } from '@/utils/sound';
 import './prizeCabinet.css';
@@ -96,7 +97,7 @@ export default function PrizesSection() {
                 <span className="reward-action">{selectedPrize === championIndex ? 'CLOSE DETAILS' : 'VIEW REWARD DETAILS'} <span aria-hidden="true">↗</span></span>
               </div>
               <div className="champion-art" aria-hidden="true">
-                {champion.art ? <img src={champion.art} alt="" draggable={false} /> : <PrizeIcon type={champion.icon} color={champion.accent} />}
+                {champion.art ? <Image src={champion.art} alt="" draggable={false} width={200} height={200} className="w-full h-full object-contain" /> : <PrizeIcon type={champion.icon} color={champion.accent} />}
               </div>
               <motion.span
                 className="reward-detail champion-detail"
@@ -127,7 +128,7 @@ export default function PrizesSection() {
                   >
                     <span className="reward-card-top"><span>{prize.rank}</span><span>{expanded ? 'CLOSE' : 'DETAILS'}</span></span>
                     <div className="reward-card-icon">
-                      {prize.art ? <img src={prize.art} alt="" draggable={false} /> : <PrizeIcon type={prize.icon} color={prize.accent} />}
+                      {prize.art ? <Image src={prize.art} alt="" draggable={false} width={150} height={150} className="w-full h-full object-contain" /> : <PrizeIcon type={prize.icon} color={prize.accent} />}
                     </div>
                     <span className="reward-label">{prize.label}</span>
                     <strong><span className="rupee">₹</span>{prize.amount}</strong>
