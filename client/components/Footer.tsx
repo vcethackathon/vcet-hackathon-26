@@ -3,6 +3,7 @@
 import { UNSTOP_URL, SITE_CONFIG } from '@/config/site';
 import { Gamepad2, MapPin, Mail, Phone, ExternalLink } from 'lucide-react';
 import { playRegistrationSound, playHoverSound } from '@/utils/sound';
+import Image from 'next/image';
 
 const navigationLinks = [
   { label: 'About', href: '#about' },
@@ -23,9 +24,11 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="md:col-span-5 space-y-4">
             <a href="/" className="inline-block group transition-transform duration-200 relative z-[60]" aria-label="VCET Hackathon 2026">
-              <img
+              <Image
                 src="/logo.png"
                 alt="VCET Hackathon 2026 Logo"
+                width={200}
+                height={80}
                 className="h-14 sm:h-16 w-auto object-contain scale-[1.7] md:scale-[2.2] origin-left drop-shadow-[0_0_10px_rgba(255,0,127,0.35)] group-hover:drop-shadow-[0_0_14px_rgba(0,240,255,0.7)] hover:scale-[1.8] md:hover:scale-[2.3] transition-all duration-300"
               />
             </a>

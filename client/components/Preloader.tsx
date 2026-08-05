@@ -52,6 +52,7 @@ export default function Preloader({ onComplete, onExitStart }: PreloaderProps) {
           <video
             ref={videoRef}
             playsInline
+            disablePictureInPicture
             preload="auto"
             onEnded={handleEnd}
             className={`absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-300 ${phase === 'playing' ? 'opacity-100' : 'opacity-0'}`}

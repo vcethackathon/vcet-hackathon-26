@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { SITE_CONFIG, UNSTOP_URL } from '@/config/site';
 import { Menu, X, ExternalLink } from 'lucide-react';
 import { playRegistrationSound, playHoverSound } from '@/utils/sound';
+import Image from 'next/image';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -43,9 +44,11 @@ export default function Navbar() {
             className="flex items-center group shrink-0 transition-transform duration-200 hover:scale-105 relative z-[70]"
             aria-label="VCET Hackathon 2026 Home"
           >
-            <img
+            <Image
               src="/logo.png"
               alt="VCET Hackathon 2026 Logo"
+              width={200}
+              height={80}
               className={`h-12 sm:h-14 md:h-16 w-auto object-contain scale-[1.5] md:scale-[1.8] origin-left drop-shadow-[0_0_10px_rgba(255,0,127,0.35)] hover:scale-[1.6] md:hover:scale-[1.9] transition-all duration-300 ${isScrolled ? 'md:scale-[1.5] hover:md:scale-[1.6]' : ''}`}
             />
           </a>

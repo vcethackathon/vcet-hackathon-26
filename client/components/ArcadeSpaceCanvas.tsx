@@ -123,7 +123,7 @@ function PowerPellets({ scroll }: { scroll: ScrollRefs }) {
 // ─── STARFIELD ─────────────────────────────────────────────────────────────
 function Starfield({ scroll }: { scroll: ScrollRefs }) {
   const pointsRef = useRef<THREE.Points>(null);
-  const count = 600;
+  const count = 300;
 
   const [positions, colors, speeds] = useMemo(() => {
     const pos = new Float32Array(count * 3);
@@ -317,8 +317,9 @@ export default function ArcadeSpaceCanvas() {
     >
       <Canvas
         camera={{ position: [0, 0, 8], fov: 50 }}
-        dpr={[1, 1.5]}
+        dpr={[0.8, 1.2]}
         frameloop="always"
+        performance={{ min: 0.5 }}
         gl={{ antialias: false, alpha: true, powerPreference: 'high-performance' }}
         style={{ width: '100%', height: '100%', background: 'transparent' }}
       >

@@ -20,7 +20,12 @@ export const metadata: Metadata = {
   description: 'Join the ultimate 30-hour college hackathon at VCET Campus. ₹1,00,000 Prize Pool. Transform pixels into real-world possibilities on Sep 4–5, 2026.',
   keywords: ['VCET Hackathon', 'Arcade', 'College Hackathon', 'Coding Competition', 'Unstop', 'Prize Pool'],
   icons: {
-    icon: '/icon.png',
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/icon.png', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/icon.png',
   },
 };
 
