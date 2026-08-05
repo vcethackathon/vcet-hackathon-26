@@ -36,6 +36,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`scroll-smooth ${pressStart2P.variable} ${spaceGrotesk.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://sketchfab.com" />
+        <link rel="dns-prefetch" href="https://sketchfab.com" />
+        <link rel="preload" href="/models/horror_pac-man.glb" as="fetch" crossOrigin="anonymous" />
+        <link rel="preload" href="/mystery-block.glb" as="fetch" crossOrigin="anonymous" />
+      </head>
       <body className="bg-[#0B0C10] text-[#F3F4F6] antialiased selection:bg-[#FF007F] selection:text-black min-h-screen">
         {children}
       </body>

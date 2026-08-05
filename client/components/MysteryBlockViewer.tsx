@@ -9,7 +9,7 @@ function ViewerFallback() {
 
 export default function MysteryBlockViewer() {
   const viewerRef = useRef<HTMLDivElement>(null);
-  const [shouldLoad, setShouldLoad] = useState(false);
+  const [shouldLoad, setShouldLoad] = useState(true);
   const [viewerReady, setViewerReady] = useState(false);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function MysteryBlockViewer() {
           observer.disconnect();
         }
       },
-      { rootMargin: '260px 0px' },
+      { rootMargin: '600px 0px' },
     );
 
     observer.observe(element);
