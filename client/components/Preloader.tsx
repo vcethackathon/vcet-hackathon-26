@@ -10,7 +10,7 @@ interface PreloaderProps {
 
 export default function Preloader({ onComplete, onExitStart }: PreloaderProps) {
   const [phase, setPhase] = useState<'playing' | 'exiting'>('playing');
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const handleEnd = useCallback(() => {
@@ -26,14 +26,16 @@ export default function Preloader({ onComplete, onExitStart }: PreloaderProps) {
 
     const playVideo = async () => {
       try {
-        // Attempt to play with sound first
+        // Attempt unmuted autoplay by default
         videoRef.current!.muted = false;
         await videoRef.current!.play();
         setIsMuted(false);
       } catch (err) {
-        // If the browser blocks unmuted autoplay, fallback to muted so the site doesn't break
-        videoRef.current!.muted = true;
-        await videoRef.current!.play().catch(() => { });
+        // Fallback to muted playback if browser autoplay policy blocks sound
+        if (videoRef.current) {
+          videoRef.current.muted = true;
+          await videoRef.current.play().catch(() => { });
+        }
         setIsMuted(true);
       }
     };
@@ -51,19 +53,20 @@ export default function Preloader({ onComplete, onExitStart }: PreloaderProps) {
           transition={{ duration: 0.8, ease: 'easeInOut' }}
           className="fixed inset-0 z-[200] bg-black overflow-hidden"
         >
-          {/* Video — attempts unmuted autoplay first */}
+          {/* Video — unmuted by default */}
           <video
             ref={videoRef}
             playsInline
             disablePictureInPicture
             preload="auto"
+            muted={isMuted}
             onEnded={handleEnd}
             className={`absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-300 ${phase === 'playing' ? 'opacity-100' : 'opacity-0'}`}
           >
             <source src="/preloader_v2.mp4" type="video/mp4" />
           </video>
 
-          {/* Sound control button */}
+          {/* Mute / Unmute Toggle Button */}
           {phase === 'playing' && (
             <button
               onClick={() => {
@@ -73,9 +76,11 @@ export default function Preloader({ onComplete, onExitStart }: PreloaderProps) {
                   setIsMuted(nextMuted);
                 }
               }}
-              className="absolute top-5 right-5 z-20 font-pixel text-[10px] sm:text-xs text-white/60 hover:text-white uppercase tracking-widest border border-white/20 hover:border-[#00F0FF]/60 px-4 py-2.5 transition-all duration-200 bg-black/40 backdrop-blur-sm hover:shadow-[0_0_15px_rgba(0,240,255,0.2)] rounded-none"
+              className="absolute top-5 right-5 z-20 font-pixel text-[10px] sm:text-xs text-white/80 hover:text-[#00F0FF] uppercase tracking-widest border border-white/20 hover:border-[#00F0FF]/80 px-4 py-2.5 transition-all duration-200 bg-black/60 backdrop-blur-md hover:shadow-[0_0_15px_rgba(0,240,255,0.4)] flex items-center gap-2"
+              aria-label={isMuted ? "Unmute video" : "Mute video"}
             >
-              {isMuted ? '🔇 UNMUTE' : '🔊 MUTE'}
+              <span>{isMuted ? '🔇' : '🔊'}</span>
+              <span>{isMuted ? 'UNMUTE' : 'MUTE'}</span>
             </button>
           )}
 
