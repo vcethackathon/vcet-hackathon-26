@@ -14,6 +14,52 @@ const nextConfig: NextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
 
+  // Permanent 301 redirects for legacy routes, old registration pages, or indexed sitelinks
+  async redirects() {
+    return [
+      {
+        source: "/register",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/registration",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/registration-closed",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/register-closed",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/closed",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/apply",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/2024",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/2025",
+        destination: "/",
+        permanent: true,
+      },
+    ];
+  },
+
   // Aggressive HTTP caching headers for all static assets
   async headers() {
     return [
