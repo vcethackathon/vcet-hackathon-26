@@ -13,14 +13,15 @@ const ArcadeStage = dynamic(() => import("@/components/ArcadeStage"), {
 interface HeroSectionProps {
   coinState: "idle" | "ready";
   onInsertCoin: () => void;
+  show3D?: boolean;
 }
 
-export default function HeroSection({ coinState, onInsertCoin }: HeroSectionProps) {
+export default function HeroSection({ coinState, onInsertCoin, show3D = true }: HeroSectionProps) {
   return (
     <section id="hero" className="hero-section">
       {/* Full-bleed Sketchfab 3D Arcade Cabinet — positioned on the right */}
       <div className="hero-canvas-wrap">
-        <ArcadeStage />
+        {show3D && <ArcadeStage />}
       </div>
 
       {/* Dark gradient overlay — solid black/dark on left for text, fades to transparent on right */}
