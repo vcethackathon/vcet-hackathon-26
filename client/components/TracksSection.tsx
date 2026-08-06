@@ -113,7 +113,7 @@ export default function TracksSection() {
           </h2>
 
           <p className="font-sans-custom text-sm sm:text-base text-gray-300 max-w-2xl leading-relaxed">
-            Choose from <strong className="text-white font-semibold">5 official competition tracks</strong>. Build high-impact solutions, push technical boundaries, and claim your share of the <span className="text-[#FFD700] font-semibold">₹1,00,000 jackpot</span>.
+            Choose from <strong className="text-white font-semibold">5 official competition tracks</strong>. Build high-impact solutions, push technical boundaries, and claim your share of the <span className="text-[#FFD700] font-semibold">₹85,000 jackpot</span>.
           </p>
         </div>
 
@@ -129,9 +129,8 @@ export default function TracksSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.08 }}
-                className={`relative bg-[#0D0E16]/90 border border-gray-800/80 p-6 sm:p-7 rounded-lg flex flex-col justify-between group transition-all duration-300 ${track.borderHover} ${track.shadowHover} ${
-                  idx === 4 ? 'md:col-span-2 lg:col-span-1' : ''
-                }`}
+                className={`relative bg-[#0D0E16]/90 border border-gray-800/80 p-6 sm:p-7 rounded-lg flex flex-col justify-between group transition-all duration-300 ${track.borderHover} ${track.shadowHover} ${idx === 4 ? 'md:col-span-2 lg:col-span-1' : ''
+                  }`}
                 style={{
                   boxShadow: `0 4px 20px rgba(0, 0, 0, 0.6)`,
                 }}
@@ -208,7 +207,7 @@ export default function TracksSection() {
                 READY TO HACK IN ONE OF THESE DOMAINS?
               </h4>
               <p className="text-xs text-gray-300 font-sans-custom mt-1">
-                Form your team of 2–4 members and register on Unstop to lock in your slot.
+                Form your team of 3–4 members and register on Unstop to lock in your slot.
               </p>
             </div>
           </div>

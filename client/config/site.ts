@@ -14,7 +14,7 @@ export const SITE_CONFIG = {
     instagram: "https://www.instagram.com/vcet_hackathon26/",
     linkedin: "https://www.linkedin.com/in/vcet-hackathon/",
   },
-  prizePool: "₹1,00,000",
+  prizePool: "₹85,000",
   unstopUrl: UNSTOP_URL,
   navLinks: [
     { name: "ABOUT", href: "#about" },
@@ -25,7 +25,7 @@ export const SITE_CONFIG = {
     { name: "FAQ", href: "#faq" },
   ],
   stats: [
-    { label: "TOTAL PRIZE POOL", value: 100000, prefix: "₹", suffix: "", isCurrency: true },
+    { label: "TOTAL PRIZE POOL", value: 85000, prefix: "₹", suffix: "", isCurrency: true },
     { label: "DAYS OF HACKING", value: 2, prefix: "", suffix: " DAYS" },
     { label: "HOURS OF CODE", value: 30, prefix: "", suffix: "+ HRS" },
     { label: "EXPECTED PARTICIPANTS", value: 200, prefix: "", suffix: "+" },
@@ -33,15 +33,15 @@ export const SITE_CONFIG = {
   faqItems: [
     {
       q: "WHO CAN PARTICIPATE IN VCET HACKATHON 2026?",
-      a: "The hackathon is open to all undergraduate and postgraduate students from any stream or institution with a valid student ID. Whether you are a freshman writing your first line of code or a senior building distributed systems, all skill levels are welcome!",
+      a: "The hackathon is open to all undergraduate students from any stream or institution with a valid student ID. Whether you are a freshman writing your first line of code or a senior building distributed systems, all skill levels are welcome!",
     },
     {
       q: "WHAT IS THE TEAM SIZE?",
-      a: "Teams can consist of 2 to 4 members. You can register as a team or form a team before the event starts. Individual participation is not recommended as hackathons thrive on team collaboration.",
+      a: "Teams can consist of 3 to 4 members. You can register as a team or form a team before the event starts. Individual participation is not Allowed by our organizing team.",
     },
     {
       q: "IS THERE A REGISTRATION FEE?",
-      a: "Registration details and nominal entry requirements are managed via Unstop. Click the 'REGISTER ON UNSTOP' button above to check full details on the official platform.",
+      a: "Registration fee is ₹500 per head. Registration details and nominal entry requirements are managed via Unstop. After the shortlisting round via Unstop only the shortlisted team will have to pay the registration price in total depending on the number of members in a team.",
     },
     {
       q: "DO I NEED TO HAVE A WORKING PROTOTYPE AT SUBMISSION?",
@@ -53,7 +53,7 @@ export const SITE_CONFIG = {
     },
     {
       q: "WHAT SHOULD I BRING TO THE VENUE?",
-      a: "Bring your laptop, charger, valid college ID card, extension cord, personal essentials, and your endless creativity! High-speed Wi-Fi, power outlets, snacks, and resting areas will be provided on campus.",
+      a: "Bring your laptop, charger, valid college ID card, extension cord, personal essentials, and your endless creativity! High-speed Wi-Fi, power outlets, some refreshments and resting areas will be provided to the participants during the event.",
     },
   ],
 };
