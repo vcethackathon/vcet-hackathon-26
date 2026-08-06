@@ -10,7 +10,37 @@ import type { TimelineEvent } from './WorldMapCard';
  */
 
 export default function TimelineSection() {
-  const [activeDay, setActiveDay] = useState<'day1' | 'day2'>('day1');
+  const [activeDay, setActiveDay] = useState<'preStage' | 'day1' | 'day2'>('preStage');
+
+  const preStageEvents: TimelineEvent[] = [
+    {
+      stage: 'LEVEL 00',
+      title: 'Registration',
+      time: '05 Aug - 20 Aug',
+      desc: 'Registration round and Abstract submission. Upload a combined abstract PDF for any 2 problem statements out of the given 5 during registration (only PDF file). Follow the given template for Abstract PPT.',
+      status: 'STARTING NODE',
+      checkpoint: 'START',
+      marker: 'REG',
+    },
+    {
+      stage: 'LEVEL 00',
+      title: 'Shortlisting',
+      time: '20 Aug - 22 Aug',
+      desc: 'Shortlisted participants will be notified via mail.',
+      status: 'CHECKPOINT',
+      checkpoint: 'CHECKPOINT',
+      marker: 'WAIT',
+    },
+    {
+      stage: 'LEVEL 00',
+      title: 'Payment',
+      time: '20 Aug - 22 Aug',
+      desc: 'Shortlisted Participants have to pay registration fees (before 22nd August).',
+      status: 'ACTION NODE',
+      checkpoint: 'ACTION',
+      marker: 'PAY',
+    }
+  ];
 
   const day1Events: TimelineEvent[] = [
     {
@@ -81,7 +111,7 @@ export default function TimelineSection() {
     }
   ];
 
-  const activeList = activeDay === 'day1' ? day1Events : day2Events;
+  const activeList = activeDay === 'preStage' ? preStageEvents : activeDay === 'day1' ? day1Events : day2Events;
 
   return (
     <section
@@ -114,10 +144,21 @@ export default function TimelineSection() {
         </div>
 
         {/* Day Selector Tabs */}
-        <div className="flex justify-center gap-4 mb-16 px-4">
+        <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-16 px-4">
+          <button
+            onClick={() => setActiveDay('preStage')}
+            className={`font-pixel text-[10px] sm:text-xs px-3 sm:px-5 py-3 border-2 transition-all ${
+              activeDay === 'preStage'
+                ? 'bg-[#8A2BE2] text-white border-black shadow-[4px_4px_0px_#00F0FF]'
+                : 'bg-[#12131C] text-gray-400 border-gray-800 hover:text-white hover:border-gray-600'
+            }`}
+            aria-pressed={activeDay === 'preStage'}
+          >
+            PRE-STAGE (AUG 5 - AUG 22)
+          </button>
           <button
             onClick={() => setActiveDay('day1')}
-            className={`font-pixel text-[10px] sm:text-xs px-5 sm:px-7 py-3 border-2 transition-all ${
+            className={`font-pixel text-[10px] sm:text-xs px-3 sm:px-5 py-3 border-2 transition-all ${
               activeDay === 'day1'
                 ? 'bg-[#FF007F] text-white border-black shadow-[4px_4px_0px_#00F0FF]'
                 : 'bg-[#12131C] text-gray-400 border-gray-800 hover:text-white hover:border-gray-600'
@@ -128,7 +169,7 @@ export default function TimelineSection() {
           </button>
           <button
             onClick={() => setActiveDay('day2')}
-            className={`font-pixel text-[10px] sm:text-xs px-5 sm:px-7 py-3 border-2 transition-all ${
+            className={`font-pixel text-[10px] sm:text-xs px-3 sm:px-5 py-3 border-2 transition-all ${
               activeDay === 'day2'
                 ? 'bg-[#00F0FF] text-black border-black shadow-[4px_4px_0px_#FF007F]'
                 : 'bg-[#12131C] text-gray-400 border-gray-800 hover:text-white hover:border-gray-600'

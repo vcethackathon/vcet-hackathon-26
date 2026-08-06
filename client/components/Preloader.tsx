@@ -10,7 +10,7 @@ interface PreloaderProps {
 
 export default function Preloader({ onComplete, onExitStart }: PreloaderProps) {
   const [phase, setPhase] = useState<'playing' | 'exiting'>('playing');
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const handleEnd = useCallback(() => {
@@ -59,6 +59,7 @@ export default function Preloader({ onComplete, onExitStart }: PreloaderProps) {
             playsInline
             disablePictureInPicture
             preload="auto"
+            autoPlay
             muted={isMuted}
             onEnded={handleEnd}
             className={`absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-300 ${phase === 'playing' ? 'opacity-100' : 'opacity-0'}`}
@@ -76,7 +77,7 @@ export default function Preloader({ onComplete, onExitStart }: PreloaderProps) {
                   setIsMuted(nextMuted);
                 }
               }}
-              className="absolute top-5 right-5 z-20 font-pixel text-[10px] sm:text-xs text-white/80 hover:text-[#00F0FF] uppercase tracking-widest border border-white/20 hover:border-[#00F0FF]/80 px-4 py-2.5 transition-all duration-200 bg-black/60 backdrop-blur-md hover:shadow-[0_0_15px_rgba(0,240,255,0.4)] flex items-center gap-2"
+              className="absolute top-5 right-5 z-20 font-pixel text-[10px] sm:text-xs text-white/80 hover:text-[#00F0FF] uppercase tracking-widest border border-white/20 hover:border-[#00F0FF]/80 px-4 py-2.5 transition-all duration-200 bg-black/60 hover:shadow-[0_0_15px_rgba(0,240,255,0.4)] flex items-center gap-2"
               aria-label={isMuted ? "Unmute video" : "Mute video"}
             >
               <span>{isMuted ? '🔇' : '🔊'}</span>
@@ -98,7 +99,7 @@ export default function Preloader({ onComplete, onExitStart }: PreloaderProps) {
               >
                 <button
                   onClick={handleEnd}
-                  className="font-pixel text-[10px] sm:text-xs text-white/50 hover:text-white uppercase tracking-widest border border-white/20 hover:border-[#00F0FF]/60 px-5 py-2.5 transition-all duration-200 bg-black/50 backdrop-blur-sm hover:shadow-[0_0_15px_rgba(0,240,255,0.3)]"
+                  className="font-pixel text-[10px] sm:text-xs text-white/50 hover:text-white uppercase tracking-widest border border-white/20 hover:border-[#00F0FF]/60 px-5 py-2.5 transition-all duration-200 bg-black/50 hover:shadow-[0_0_15px_rgba(0,240,255,0.3)]"
                 >
                   SKIP INTRO ▶▶
                 </button>

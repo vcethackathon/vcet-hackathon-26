@@ -33,6 +33,7 @@ const MARGIN_PX = 2;
 export function FramerThumbnailCarousel() {
   const [index, setIndex] = useState<number>(0);
   const [isDragging, setIsDragging] = useState<boolean>(false);
+  const [isHovered, setIsHovered] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const x = useMotionValue(0);
@@ -51,20 +52,25 @@ export function FramerThumbnailCarousel() {
   }, [index, x, isDragging]);
 
   useEffect(() => {
-    if (isDragging) return;
+    if (isDragging || isHovered) return;
 
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % items.length);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [isDragging]);
+  }, [isDragging, isHovered]);
 
   return (
     <div className='max-w-3xl mx-auto lg:p-10 p-2'>
       <div className='flex flex-col gap-3'>
         {/* Main Carousel */}
-        <div className='relative overflow-hidden rounded-lg' ref={containerRef}>
+        <div
+          className='relative overflow-hidden rounded-lg'
+          ref={containerRef}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
           <motion.div
             className='flex'
             drag='x'

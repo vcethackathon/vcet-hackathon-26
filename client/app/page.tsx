@@ -112,7 +112,7 @@ export default function Page() {
         }`}
       >
         {/* 3D background space canvas — mounted only after preloader */}
-        <ArcadeSpaceCanvas />
+        {preloaderPhase === 'done' && <ArcadeSpaceCanvas />}
 
         {/* Retro CRT Scanlines & Vignette Overlay */}
         <CRTOverlay />
@@ -121,10 +121,10 @@ export default function Page() {
         <Navbar />
 
         {/* 1. 3D Arcade Cabinet Hero Section */}
-        <HeroSection coinState={coinState} onInsertCoin={handleInsertCoin} />
+        <HeroSection coinState={coinState} onInsertCoin={handleInsertCoin} show3D={preloaderPhase === 'done'} />
 
         {/* 2. 3D Pac-Man About Section */}
-        <AboutSection />
+        <AboutSection show3D={preloaderPhase === 'done'} />
 
         {/* 3. Scoreboard Stats Strip */}
         <StatsStrip />
