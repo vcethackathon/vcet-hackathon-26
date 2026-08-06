@@ -68,7 +68,7 @@ export default function ScrollProgressRail({
 
           return (
             <button
-              key={label}
+              key={`${label}-${i}`}
               onClick={() => onSelect(i)}
               className="relative z-10 flex items-center gap-2.5 py-2.5 group focus:outline-none focus:ring-2 focus:ring-[#00F0FF] rounded-sm"
               aria-label={`Jump to level ${label}`}
