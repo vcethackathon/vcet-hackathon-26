@@ -121,7 +121,7 @@ export default function Page() {
         <Navbar />
 
         {/* 1. 3D Arcade Cabinet Hero Section */}
-        <HeroSection coinState={coinState} onInsertCoin={handleInsertCoin} show3D={preloaderPhase === 'done'} />
+        <HeroSection coinState={coinState} onInsertCoin={handleInsertCoin} />
 
         {/* 2. 3D Pac-Man About Section */}
         <AboutSection show3D={preloaderPhase === 'done'} />

@@ -89,6 +89,19 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://sketchfab.com" />
         <link rel="preload" href="/models/horror_pac-man.glb" as="fetch" crossOrigin="anonymous" />
         <link rel="preload" href="/mystery-block.glb" as="fetch" crossOrigin="anonymous" />
+        {/* Google tag (gtag.js) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-9S1HGFTT07"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'G-9S1HGFTT07');
+            `,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(eventJsonLd) }}
