@@ -17,6 +17,7 @@ import PrizesSection from "@/components/PrizesSection";
 import SponsorsMarquee from "@/components/SponsorsMarquee";
 import FaqSection from "@/components/FaqSection";
 import Footer from "@/components/Footer";
+import { FramerThumbnailCarousel } from "@/components/ui/framer-thumbnail-carousel";
 
 // Fixed 3D background space canvas — lazy-loaded, no SSR
 const ArcadeSpaceCanvas = dynamic(
@@ -139,6 +140,23 @@ export default function Page() {
 
         {/* 7. Sponsors Marquee */}
         <SponsorsMarquee />
+
+        {/* 7.5 Gallery Carousel */}
+        <section id="gallery" className="relative py-24 bg-[#0B0C10] border-t-2 border-[#00F0FF]/30 overflow-hidden">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="text-center mb-10">
+              <h2 className="font-pixel text-4xl sm:text-5xl uppercase tracking-tight mb-4">
+                <span className="text-[#00F0FF] block">EVENT</span>
+                <span className="text-[#FF007F] animate-glitch block drop-shadow-[0_4px_12px_rgba(255,0,127,0.6)]">
+                  GALLERY
+                </span>
+              </h2>
+            </div>
+          </div>
+          <div className="relative z-10">
+            <FramerThumbnailCarousel />
+          </div>
+        </section>
 
         {/* 8. FAQ Section */}
         <FaqSection />
