@@ -87,8 +87,6 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://sketchfab.com" />
         <link rel="dns-prefetch" href="https://sketchfab.com" />
-        <link rel="preload" href="/models/horror_pac-man.glb" as="fetch" crossOrigin="anonymous" />
-        <link rel="preload" href="/mystery-block.glb" as="fetch" crossOrigin="anonymous" />
         {/* Google tag (gtag.js) */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-9S1HGFTT07"></script>
         <script

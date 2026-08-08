@@ -125,6 +125,16 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      {
+        // GLB 3D models — long cache
+        source: "/:path*.glb",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=2592000, stale-while-revalidate=86400",
+          },
+        ],
+      },
     ];
   },
 };

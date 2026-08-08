@@ -1,5 +1,6 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import {
   AnimatePresence,
   motion,
@@ -101,11 +102,13 @@ export function FramerThumbnailCarousel() {
             style={{ x }}
           >
             {items.map((item) => (
-              <div key={item.id} className='shrink-0 w-full h-[400px]'>
-                <img
+              <div key={item.id} className='relative shrink-0 w-full h-[400px]'>
+                <Image
                   src={item.url}
                   alt={item.title}
-                  className='w-full h-full object-cover rounded-lg select-none pointer-events-none bg-zinc-800'
+                  fill
+                  sizes="(max-width: 768px) 100vw, 800px"
+                  className='object-cover rounded-lg select-none pointer-events-none bg-zinc-800'
                   draggable={false}
                   loading="lazy"
                 />
@@ -205,10 +208,12 @@ function Thumbnails({
             transition={{ duration: 0.3, ease: 'easeOut' }}
             className='relative shrink-0 h-full overflow-hidden'
           >
-            <img
+            <Image
               src={item.url}
               alt={item.title}
-              className='w-full h-full object-cover pointer-events-none select-none bg-zinc-800'
+              fill
+              sizes="120px"
+              className='object-cover pointer-events-none select-none bg-zinc-800'
               loading="lazy"
             />
           </motion.button>
