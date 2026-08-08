@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { playRegistrationSound, playHoverSound } from "@/utils/sound";
-import { preloadAll3DAssets } from "@/utils/modelPreloader";
+
 
 import Preloader from "@/components/Preloader";
 import CRTOverlay from "@/components/CRTOverlay";
@@ -30,8 +30,7 @@ export default function Page() {
   const [coinState, setCoinState] = useState<"idle" | "ready">("idle");
 
   useEffect(() => {
-    // Start preloading 3D assets immediately on website opening
-    preloadAll3DAssets();
+    // 3D assets will be lazy loaded when they enter the viewport
   }, []);
 
   useEffect(() => {

@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
-const MODEL_URL = '/models/horror_pac-man.glb';
+const MODEL_URL = '/models/pacman.glb';
 const MYSTERY_BLOCK_URL = '/mystery-block.glb';
 
 let preloadedGLTF: GLTF | null = null;

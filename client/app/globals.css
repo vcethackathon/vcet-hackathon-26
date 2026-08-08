@@ -336,7 +336,7 @@ body {
   height: 100vh;
   min-height: 720px;
   overflow: hidden;
-  background: linear-gradient(rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04)), url('/background.png') center/cover no-repeat;
+  background: linear-gradient(rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04)), url('/background.webp') center/cover no-repeat;
   background-color: var(--midnight-black);
   background-blend-mode: normal;
 }
