@@ -6,12 +6,9 @@ const nextConfig: NextConfig = {
   // Enable gzip/brotli compression for all responses
   compress: true,
 
-  // Image optimization: serve WebP/AVIF automatically, cache aggressively
+  // Image optimization: disabled to eliminate credit costs since we are pre-optimizing assets
   images: {
-    formats: ["image/avif", "image/webp"],
-    minimumCacheTTL: 2592000, // 30 days in seconds
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    unoptimized: true,
   },
 
   // Permanent 301 redirects for legacy routes, old registration pages, or indexed sitelinks
