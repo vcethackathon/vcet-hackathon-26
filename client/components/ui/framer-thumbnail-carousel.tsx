@@ -8,7 +8,7 @@ import {
   useMotionValue,
   useSpring,
   animate,
-} from 'motion/react';
+} from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export const items = [
