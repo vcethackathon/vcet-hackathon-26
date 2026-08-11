@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 
 const HorrorPacmanModel = dynamic(
-  () => import("@/components/HorrorPacmanModel"),
+  () => import("@/components/models/HorrorPacmanModel"),
   { ssr: false }
 );
 

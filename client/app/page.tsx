@@ -5,23 +5,23 @@ import dynamic from "next/dynamic";
 import { playRegistrationSound, playHoverSound } from "@/utils/sound";
 
 
-import Preloader from "@/components/Preloader";
-import CRTOverlay from "@/components/CRTOverlay";
-import Navbar from "@/components/Navbar";
+import Preloader from "@/components/layout/Preloader";
+import CRTOverlay from "@/components/layout/CRTOverlay";
+import Navbar from "@/components/layout/Navbar";
 import HeroSection from "@/components/sections/HeroSection";
 import AboutSection from "@/components/sections/AboutSection";
-import StatsStrip from "@/components/StatsStrip";
-import TracksSection from "@/components/TracksSection";
-import TimelineSection from "@/components/TimelineSection";
-import PrizesSection from "@/components/PrizesSection";
-import SponsorsMarquee from "@/components/SponsorsMarquee";
-import FaqSection from "@/components/FaqSection";
-import Footer from "@/components/Footer";
+import StatsStrip from "@/components/sections/StatsStrip";
+import TracksSection from "@/components/sections/TracksSection";
+import TimelineSection from "@/components/sections/TimelineSection";
+import PrizesSection from "@/components/sections/PrizesSection";
+import SponsorsMarquee from "@/components/sections/SponsorsMarquee";
+import FaqSection from "@/components/sections/FaqSection";
+import Footer from "@/components/layout/Footer";
 import { FramerThumbnailCarousel } from "@/components/ui/framer-thumbnail-carousel";
 
 // Fixed 3D background space canvas — lazy-loaded, no SSR
 const ArcadeSpaceCanvas = dynamic(
-  () => import("@/components/ArcadeSpaceCanvas"),
+  () => import("@/components/models/ArcadeSpaceCanvas"),
   { ssr: false }
 );
 
