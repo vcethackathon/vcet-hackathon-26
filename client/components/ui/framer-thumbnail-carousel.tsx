@@ -8,22 +8,22 @@ import {
   useMotionValue,
   useSpring,
   animate,
-} from 'motion/react';
+} from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export const items = [
-  { id: 1, url: '/gallery/IMG_0503.jpg', title: 'Gallery Image 1' },
-  { id: 2, url: '/gallery/IMG_0533.jpg', title: 'Gallery Image 2' },
-  { id: 3, url: '/gallery/IMG_0539.jpg', title: 'Gallery Image 3' },
-  { id: 4, url: '/gallery/IMG_0558.jpg', title: 'Gallery Image 4' },
-  { id: 5, url: '/gallery/IMG_0580.jpg', title: 'Gallery Image 5' },
-  { id: 6, url: '/gallery/IMG_0585.jpg', title: 'Gallery Image 6' },
-  { id: 7, url: '/gallery/IMG_0610.jpg', title: 'Gallery Image 7' },
-  { id: 8, url: '/gallery/IMG_0615.jpg', title: 'Gallery Image 8' },
-  { id: 9, url: '/gallery/IMG_6762.JPG.jpeg', title: 'Gallery Image 9' },
-  { id: 10, url: '/gallery/IMG_6767.JPG.jpeg', title: 'Gallery Image 10' },
-  { id: 11, url: '/gallery/IMG_9722.JPG.jpeg', title: 'Gallery Image 11' },
-  { id: 12, url: '/gallery/_MG_1611.JPG.jpeg', title: 'Gallery Image 12' },
+  { id: 1, url: '/gallery/IMG_0503.webp', title: 'Gallery Image 1' },
+  { id: 2, url: '/gallery/IMG_0533.webp', title: 'Gallery Image 2' },
+  { id: 3, url: '/gallery/IMG_0539.webp', title: 'Gallery Image 3' },
+  { id: 4, url: '/gallery/IMG_0558.webp', title: 'Gallery Image 4' },
+  { id: 5, url: '/gallery/IMG_0580.webp', title: 'Gallery Image 5' },
+  { id: 6, url: '/gallery/IMG_0585.webp', title: 'Gallery Image 6' },
+  { id: 7, url: '/gallery/IMG_0610.webp', title: 'Gallery Image 7' },
+  { id: 8, url: '/gallery/IMG_0615.webp', title: 'Gallery Image 8' },
+  { id: 9, url: '/gallery/IMG_6762.JPG.webp', title: 'Gallery Image 9' },
+  { id: 10, url: '/gallery/IMG_6767.JPG.webp', title: 'Gallery Image 10' },
+  { id: 11, url: '/gallery/IMG_9722.JPG.webp', title: 'Gallery Image 11' },
+  { id: 12, url: '/gallery/_MG_1611.JPG.webp', title: 'Gallery Image 12' },
 ];
 
 const FULL_WIDTH_PX = 120;

@@ -6,7 +6,7 @@ import { UNSTOP_URL } from "@/config/site";
 import { ExternalLink } from "lucide-react";
 import { playRegistrationSound, playHoverSound } from "@/utils/sound";
 
-const ArcadeStage = dynamic(() => import("@/components/ArcadeStage"), {
+const ArcadeStage = dynamic(() => import("@/components/models/ArcadeStage"), {
   ssr: false,
 });
 
