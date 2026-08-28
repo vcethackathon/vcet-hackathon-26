@@ -11,7 +11,7 @@ export const SITE_CONFIG = {
   venue: "VCET Campus",
   email: "vcet.hackathon@vcet.edu.in",
   socials: {
-    instagram: "https://www.instagram.com/vcet_hackathon26/",
+    instagram: "https://www.instagram.com/vcet_hackathon/",
     linkedin: "https://www.linkedin.com/in/vcet-hackathon/",
   },
   prizePool: "₹85,000",
