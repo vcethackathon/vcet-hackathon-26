@@ -53,21 +53,12 @@ export default function HeroSection({ coinState, onInsertCoin, show3D = true }: 
         </p>
 
         <div className="hero-actions mb-4">
-          <a
+          <span
             id="register"
-            href={UNSTOP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => {
-              playRegistrationSound();
-              onInsertCoin();
-            }}
-            onMouseEnter={playHoverSound}
-            className="btn-arcade-magenta px-6 py-3.5 text-xs tracking-wider flex items-center gap-2 rounded-none font-bold"
+            className="btn-arcade-disabled px-6 py-3.5 text-xs tracking-wider flex items-center gap-2 rounded-none font-bold"
           >
-            <span>▶ REGISTER ON UNSTOP</span>
-            <ExternalLink className="w-4 h-4" />
-          </a>
+            <span>🚫 REGISTRATIONS CLOSED</span>
+          </span>
           <a href="#about" className="btn-arcade-cyan px-6 py-3.5 text-xs tracking-wider flex items-center gap-2 rounded-none font-bold">
             LEARN MORE
           </a>

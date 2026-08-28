@@ -207,20 +207,16 @@ export default function TracksSection() {
                 READY TO HACK IN ONE OF THESE DOMAINS?
               </h4>
               <p className="text-xs text-gray-300 font-sans-custom mt-1">
-                Form your team of 3–4 members and register on Unstop to lock in your slot.
+                Registrations are now closed. Stay tuned for updates!
               </p>
             </div>
           </div>
 
-          <a
-            href={UNSTOP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-arcade-magenta px-6 py-3 text-xs tracking-wider font-bold whitespace-nowrap shrink-0 flex items-center gap-2"
+          <span
+            className="btn-arcade-disabled px-6 py-3 text-xs tracking-wider font-bold whitespace-nowrap shrink-0 flex items-center gap-2"
           >
-            <span>REGISTER ON UNSTOP</span>
-            <ChevronRight className="w-4 h-4" />
-          </a>
+            <span>🚫 REGISTRATIONS CLOSED</span>
+          </span>
         </div>
       </div>
     </section>

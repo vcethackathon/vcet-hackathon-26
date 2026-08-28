@@ -46,14 +46,11 @@ export default function NotFound() {
           >
             ▶ GO TO HOME
           </Link>
-          <a
-            href={UNSTOP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-arcade-magenta px-6 py-3 text-xs font-pixel tracking-wider text-center"
+          <span
+            className="btn-arcade-disabled px-6 py-3 text-xs font-pixel tracking-wider text-center"
           >
-            REGISTER ON UNSTOP
-          </a>
+            🚫 REGISTRATIONS CLOSED
+          </span>
         </div>
 
         <p className="text-gray-500 text-xs mt-6 font-mono">
