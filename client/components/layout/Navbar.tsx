@@ -1,9 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { SITE_CONFIG, UNSTOP_URL } from '@/config/site';
-import { Menu, X, ExternalLink } from 'lucide-react';
-import { playRegistrationSound, playHoverSound } from '@/utils/sound';
+import { SITE_CONFIG } from '@/config/site';
+import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 
 export default function Navbar() {

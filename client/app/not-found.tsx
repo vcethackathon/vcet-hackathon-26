@@ -3,7 +3,6 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { UNSTOP_URL } from "@/config/site";
 
 export default function NotFound() {
   const router = useRouter();
