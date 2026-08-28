@@ -68,31 +68,20 @@ export default function Navbar() {
 
           {/* Right Action Button */}
           <div className="hidden sm:flex items-center gap-4">
-            <a
-              href={UNSTOP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={playRegistrationSound}
-              onMouseEnter={playHoverSound}
-              className="btn-arcade-magenta px-4 py-2 text-[11px] rounded-none flex items-center gap-2"
+            <span
+              className="btn-arcade-disabled px-4 py-2 text-[11px] rounded-none flex items-center gap-2"
             >
-              <span>REGISTER</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
+              <span>CLOSED</span>
+            </span>
           </div>
 
           {/* Mobile Menu Button */}
           <div className="flex sm:hidden items-center gap-3">
-            <a
-              href={UNSTOP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={playRegistrationSound}
-              onMouseEnter={playHoverSound}
-              className="btn-arcade-magenta px-3 py-1.5 text-[10px] flex items-center gap-1"
+            <span
+              className="btn-arcade-disabled px-3 py-1.5 text-[10px] flex items-center gap-1"
             >
-              <span>REGISTER</span>
-            </a>
+              <span>CLOSED</span>
+            </span>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 text-white hover:text-[#00F0FF] focus:outline-none"
@@ -118,20 +107,11 @@ export default function Navbar() {
             </a>
           ))}
           <div className="pt-2">
-            <a
-              href={UNSTOP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => {
-                playRegistrationSound();
-                setMobileMenuOpen(false);
-              }}
-              onMouseEnter={playHoverSound}
-              className="btn-arcade-magenta w-full py-3 text-xs flex items-center justify-center gap-2"
+            <span
+              className="btn-arcade-disabled w-full py-3 text-xs flex items-center justify-center gap-2"
             >
-              <span>REGISTER ON UNSTOP</span>
-              <ExternalLink className="w-4 h-4" />
-            </a>
+              <span>🚫 REGISTRATIONS CLOSED</span>
+            </span>
           </div>
         </div>
       )}

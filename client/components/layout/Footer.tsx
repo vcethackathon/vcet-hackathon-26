@@ -120,17 +120,11 @@ export default function Footer() {
             </div>
 
             <div className="pt-2">
-              <a
-                href={UNSTOP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={playRegistrationSound}
-                onMouseEnter={playHoverSound}
-                className="btn-arcade-magenta w-full py-3 text-xs flex items-center justify-center gap-2 rounded-none"
+              <span
+                className="btn-arcade-disabled w-full py-3 text-xs flex items-center justify-center gap-2 rounded-none"
               >
-                <span>REGISTER ON UNSTOP</span>
-                <ExternalLink className="w-4 h-4" />
-              </a>
+                <span>🚫 REGISTRATIONS CLOSED</span>
+              </span>
             </div>
           </div>
 
