@@ -9,9 +9,7 @@ import {
   GitBranch,
   Sparkles,
   Zap,
-  ChevronRight,
 } from 'lucide-react';
-import { UNSTOP_URL } from '@/config/site';
 
 export default function TracksSection() {
   const tracks = [

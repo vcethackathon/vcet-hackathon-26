@@ -1,8 +1,8 @@
 'use client';
 
-import { UNSTOP_URL, SITE_CONFIG } from '@/config/site';
-import { Gamepad2, MapPin, Mail, Phone, ExternalLink } from 'lucide-react';
-import { playRegistrationSound, playHoverSound } from '@/utils/sound';
+import { SITE_CONFIG } from '@/config/site';
+import { MapPin, Mail, Phone } from 'lucide-react';
+import { playHoverSound } from '@/utils/sound';
 import Image from 'next/image';
 
 const navigationLinks = [

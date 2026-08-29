@@ -2,9 +2,6 @@
 
 import dynamic from "next/dynamic";
 import Countdown from "@/components/ui/Countdown";
-import { UNSTOP_URL } from "@/config/site";
-import { ExternalLink } from "lucide-react";
-import { playRegistrationSound, playHoverSound } from "@/utils/sound";
 
 const ArcadeStage = dynamic(() => import("@/components/models/ArcadeStage"), {
   ssr: false,
@@ -16,7 +13,7 @@ interface HeroSectionProps {
   show3D?: boolean;
 }
 
-export default function HeroSection({ coinState, onInsertCoin, show3D = true }: HeroSectionProps) {
+export default function HeroSection({ coinState: _coinState, onInsertCoin: _onInsertCoin, show3D = true }: HeroSectionProps) {
   return (
     <section id="hero" className="hero-section">
       {/* Full-bleed Sketchfab 3D Arcade Cabinet — positioned on the right */}
