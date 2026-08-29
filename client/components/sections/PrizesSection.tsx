@@ -2,10 +2,8 @@
 
 import { useState, type CSSProperties } from 'react';
 import { motion } from 'framer-motion';
-import { Coins, Crown, ExternalLink, Medal, Star, Trophy } from 'lucide-react';
+import { Coins, Crown, Medal, Star, Trophy } from 'lucide-react';
 import Image from 'next/image';
-import { UNSTOP_URL } from '@/config/site';
-import { playRegistrationSound, playHoverSound } from '@/utils/sound';
 import '@/components/styles/prizeCabinet.css';
 import MysteryBlockViewer from '@/components/models/MysteryBlockViewer';
 

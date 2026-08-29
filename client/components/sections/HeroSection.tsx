@@ -13,7 +13,7 @@ interface HeroSectionProps {
   show3D?: boolean;
 }
 
-export default function HeroSection({ coinState, onInsertCoin, show3D = true }: HeroSectionProps) {
+export default function HeroSection({ coinState: _coinState, onInsertCoin: _onInsertCoin, show3D = true }: HeroSectionProps) {
   return (
     <section id="hero" className="hero-section">
       {/* Full-bleed Sketchfab 3D Arcade Cabinet — positioned on the right */}
