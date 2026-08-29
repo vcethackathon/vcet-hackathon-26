@@ -10,7 +10,7 @@ import type { TimelineEvent } from '@/components/ui/WorldMapCard';
  */
 
 export default function TimelineSection() {
-  const [activeDay, setActiveDay] = useState<'preStage' | 'day1' | 'day2'>('preStage');
+  const [activeDay, setActiveDay] = useState<'preStage' | 'day1' | 'day2'>('day1');
 
   const preStageEvents: TimelineEvent[] = [
     {
