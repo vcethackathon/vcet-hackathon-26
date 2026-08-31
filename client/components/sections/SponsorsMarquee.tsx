@@ -118,7 +118,7 @@ export default function SponsorsMarquee() {
 
             <div className="flex items-center justify-between mb-4 border-b border-[#00F0FF]/30 pb-3">
               <span className="font-pixel text-[9px] sm:text-[10px] text-[#00F0FF] tracking-wider uppercase">
-                ⚡ RANK 02 // CO-SPONSOR
+                ⚡ RANK 02 // POWERED BY
               </span>
               <span className="font-mono text-[9px] text-gray-500">
                 TIER 02
@@ -138,7 +138,7 @@ export default function SponsorsMarquee() {
                 Jeebr
               </h3>
               <p className="font-mono text-xs text-[#00F0FF] font-bold tracking-wider mt-0.5">
-                CO-SPONSOR
+                POWERED BY
               </p>
             </div>
           </motion.div>
